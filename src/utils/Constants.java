@@ -2,6 +2,8 @@ package utils;
 
 public class Constants {
 
+	public static final String port = "port";
+
 	public static final String currency_pairs = "currency_pairs";
 
 	public static final String binance_enabled 				= "binance_enabled";

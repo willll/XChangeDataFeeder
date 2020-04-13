@@ -41,522 +41,557 @@
 		<dependency>
 			<groupId>org.zeromq</groupId>
 			<artifactId>jeromq</artifactId>
-			<version>0.5.1</version>
+			<version>0.5.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-core</artifactId>
-			<version>4.3.19</version>
-		</dependency>
-		<dependency>
-			<groupId>org.knowm.xchange</groupId>
-			<artifactId>xchange-abucoins</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-acx</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-anx</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-bankera</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-bibox</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-binance</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-bitbay</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-bitcoinaverage</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-bitcoincharts</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-bitcoincore</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-bitcoinde</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-bitcoinium</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-bitcointoyou</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-bitfinex</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-bitflyer</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-bithumb</artifactId>
-			<version>4.3.19</version>
-		</dependency>
-		<dependency>
-			<groupId>org.knowm.xchange</groupId>
-			<artifactId>xchange-bitmarket</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-bitmex</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-bitso</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-bitstamp</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-bittrex</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-bity</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-bitz</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-bl3p</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-bleutrade</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-blockchain</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-btcc</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-btcmarkets</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-btctrade</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-btcturk</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-bx</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-campbx</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-ccex</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-cexio</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-cobinhood</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-coinbase</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-coinbasepro</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-coinbene</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-coindirect</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-coinegg</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-coinfloor</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-coingi</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-coinmarketcap</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-coinmate</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-coinone</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-coinsuper</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-cryptofacilities</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-cryptonit</artifactId>
-			<version>4.3.19</version>
-		</dependency>
+			<version>4.4.2</version>
+		</dependency>	
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-cryptopia</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
+			<artifactId>xchange-cryptowatch</artifactId>
+			<version>4.4.2</version>
+		</dependency>	
+		<dependency>
+			<groupId>org.knowm.xchange</groupId>
+			<artifactId>xchange-deribit</artifactId>
+			<version>4.4.2</version>
+		</dependency>	
+		<dependency>
+			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-dragonex</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-dsx</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-dvchain</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.knowm.xchange</groupId>
+			<artifactId>xchange-enigma</artifactId>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-exmo</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-exx</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-fcoin</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-gateio</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-gemini</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
+			<artifactId>xchange-globitex</artifactId>
+			<version>4.4.2</version>
+		</dependency>		
+		<dependency>
+			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-hitbtc</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-huobi</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-idex</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-itbit</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-koineks</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-koinim</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-kraken</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-kucoin</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-kuna</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-lakebtc</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
+			<artifactId>xchange-latoken</artifactId>
+			<version>4.4.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.knowm.xchange</groupId>
+			<artifactId>xchange-lgo</artifactId>
+			<version>4.4.2</version>
+		</dependency>	
+		<dependency>
+			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-liqui</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-livecoin</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-luno</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.knowm.xchange</groupId>
+			<artifactId>xchange-lykke</artifactId>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-mercadobitcoin</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-okcoin</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-openexchangerates</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-paribu</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-paymium</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-poloniex</artifactId>
-			<version>4.3.19</version>
-		</dependency>
-		<dependency>
-			<groupId>org.knowm.xchange</groupId>
-			<artifactId>xchange-quadrigacx</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-quoine</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-ripple</artifactId>
-			<version>4.3.19</version>
-		</dependency>
+			<version>4.4.2</version>
+		</dependency>	
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-therock</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.knowm.xchange</groupId>
+			<artifactId>xchange-tradeogre</artifactId>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-truefx</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-upbit</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-vaultoro</artifactId>
-			<version>4.3.19</version>
-		</dependency>
-		<dependency>
-			<groupId>org.knowm.xchange</groupId>
-			<artifactId>xchange-vircurex</artifactId>
-			<version>4.3.19</version>
-		</dependency>
-		<dependency>
-			<groupId>org.knowm.xchange</groupId>
-			<artifactId>xchange-wex</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-yobit</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-zaif</artifactId>
-			<version>4.3.19</version>
+			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>info.bitrich.xchange-stream</groupId>
 			<artifactId>xchange-stream-core</artifactId>
-			<version>4.3.16</version>
+			<version>4.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>info.bitrich.xchange-stream</groupId>
+			<artifactId>xchange-bankera</artifactId>
+			<version>4.4.1</version>
 		</dependency>
 		<dependency>
 			<groupId>info.bitrich.xchange-stream</groupId>
 			<artifactId>xchange-bitfinex</artifactId>
-			<version>4.3.16</version>
+			<version>4.4.1</version>
 		</dependency>
 		<dependency>
 			<groupId>info.bitrich.xchange-stream</groupId>
 			<artifactId>xchange-binance</artifactId>
-			<version>4.3.16</version>
+			<version>4.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>info.bitrich.xchange-stream</groupId>
+			<artifactId>xchange-bitfinex</artifactId>
+			<version>4.4.1</version>
 		</dependency>
 		<dependency>
 			<groupId>info.bitrich.xchange-stream</groupId>
 			<artifactId>xchange-bitflyer</artifactId>
-			<version>4.3.16</version>
+			<version>4.4.1</version>
 		</dependency>
 		<dependency>
 			<groupId>info.bitrich.xchange-stream</groupId>
 			<artifactId>xchange-bitmex</artifactId>
-			<version>4.3.16</version>
+			<version>4.4.1</version>
 		</dependency>
 		<dependency>
 			<groupId>info.bitrich.xchange-stream</groupId>
 			<artifactId>xchange-bitstamp</artifactId>
-			<version>4.3.16</version>
+			<version>4.4.1</version>
 		</dependency>
 		<dependency>
 			<groupId>info.bitrich.xchange-stream</groupId>
 			<artifactId>xchange-cexio</artifactId>
-			<version>4.3.16</version>
+			<version>4.4.1</version>
 		</dependency>
 		<dependency>
 			<groupId>info.bitrich.xchange-stream</groupId>
+			<artifactId>xchange-coinbasepro</artifactId>
+			<version>4.4.1</version>
+		</dependency>		
+		<dependency>
+			<groupId>info.bitrich.xchange-stream</groupId>
 			<artifactId>xchange-coinmate</artifactId>
-			<version>4.3.16</version>
+			<version>4.4.1</version>
 		</dependency>
 		<dependency>
 			<groupId>info.bitrich.xchange-stream</groupId>
 			<artifactId>xchange-gemini</artifactId>
-			<version>4.3.16</version>
+			<version>4.4.1</version>
 		</dependency>
 		<dependency>
 			<groupId>info.bitrich.xchange-stream</groupId>
 			<artifactId>xchange-hitbtc</artifactId>
-			<version>4.3.16</version>
+			<version>4.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>info.bitrich.xchange-stream</groupId>
+			<artifactId>xchange-kraken</artifactId>
+			<version>4.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>info.bitrich.xchange-stream</groupId>
+			<artifactId>xchange-lgo</artifactId>
+			<version>4.4.1</version>
 		</dependency>
 		<dependency>
 			<groupId>info.bitrich.xchange-stream</groupId>
 			<artifactId>xchange-okcoin</artifactId>
-			<version>4.3.16</version>
+			<version>4.4.1</version>
 		</dependency>
 		<dependency>
 			<groupId>info.bitrich.xchange-stream</groupId>
 			<artifactId>xchange-poloniex</artifactId>
-			<version>4.3.16</version>
+			<version>4.4.1</version>
 		</dependency>
 		<dependency>
 			<groupId>info.bitrich.xchange-stream</groupId>
 			<artifactId>xchange-poloniex2</artifactId>
-			<version>4.3.16</version>
-		</dependency>
-		<dependency>
-			<groupId>info.bitrich.xchange-stream</groupId>
-			<artifactId>xchange-wex</artifactId>
-			<version>4.3.16</version>
+			<version>4.4.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
-			<version>1.7.5</version>
+			<version>1.7.30</version>
 		</dependency>
 		<dependency>
 		    <groupId>commons-cli</groupId>

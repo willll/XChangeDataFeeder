@@ -2,14 +2,6 @@ package exchanges.factories;
 
 public class ExchangesFactory {
 
-	private static AbucoinsFactory abucoinsFactory = null;
-
-	public static AbucoinsFactory getAbucoinsFactory() {
-		if (abucoinsFactory == null)
-			abucoinsFactory = new AbucoinsFactory();
-		return abucoinsFactory;
-	}
-
 	private static AcxFactory acxFactory = null;
 
 	public static AcxFactory getAcxFactory() {
@@ -128,14 +120,6 @@ public class ExchangesFactory {
 		if (bithumbFactory == null)
 			bithumbFactory = new BithumbFactory();
 		return bithumbFactory;
-	}
-
-	private static BitmarketFactory bitmarketFactory = null;
-
-	public static BitmarketFactory getBitmarketFactory() {
-		if (bitmarketFactory == null)
-			bitmarketFactory = new BitmarketFactory();
-		return bitmarketFactory;
 	}
 
 	private static BitmexFactory bitmexFactory = null;
@@ -634,14 +618,6 @@ public class ExchangesFactory {
 		return poloniexFactory;
 	}
 
-	private static QuadrigacxFactory quadrigacxFactory = null;
-
-	public static QuadrigacxFactory getQuadrigacxFactory() {
-		if (quadrigacxFactory == null)
-			quadrigacxFactory = new QuadrigacxFactory();
-		return quadrigacxFactory;
-	}
-
 	private static QuoineFactory quoineFactory = null;
 
 	public static QuoineFactory getQuoineFactory() {
@@ -688,22 +664,6 @@ public class ExchangesFactory {
 		if (vaultoroFactory == null)
 			vaultoroFactory = new VaultoroFactory();
 		return vaultoroFactory;
-	}
-
-	private static VircurexFactory vircurexFactory = null;
-
-	public static VircurexFactory getVircurexFactory() {
-		if (vircurexFactory == null)
-			vircurexFactory = new VircurexFactory();
-		return vircurexFactory;
-	}
-
-	private static WexFactory wexFactory = null;
-
-	public static WexFactory getWexFactory() {
-		if (wexFactory == null)
-			wexFactory = new WexFactory();
-		return wexFactory;
 	}
 
 	private static YobitFactory yobitFactory = null;

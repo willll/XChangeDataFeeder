@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.currency.CurrencyPair;
 
 import org.slf4j.Logger;
@@ -20,7 +19,6 @@ import info.bitrich.xchangestream.core.ProductSubscription;
 import info.bitrich.xchangestream.core.ProductSubscription.ProductSubscriptionBuilder;
 import info.bitrich.xchangestream.core.StreamingExchange;
 import tasks.OrderBookPublisherStreamingTask;
-import tasks.TasksAggregator;
 import tasks.TickerPublisherStreamingTask;
 import utils.Config;
 import utils.Constants;
@@ -70,8 +68,9 @@ public class Main {
 		ZContext ctx = new ZContext();
 
 		// bus configuration :
+		String port = Config.getInstance().get(Constants.port);
 		Socket clients = ctx.createSocket(ZMQ.XPUB);
-		clients.bind("tcp://*:5563");
+		clients.bind("tcp://*:" + port);
 		Socket workers = ctx.createSocket(ZMQ.XSUB);
 		workers.bind("inproc://workers");
 

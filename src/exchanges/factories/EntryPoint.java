@@ -8,7 +8,6 @@ import exchanges.*;
  */
 public class EntryPoint {
 
-	private Abucoins abucoins = null;
 	private Acx acx = null;
 	private Anx anx = null;
 	private Bankera bankera = null;
@@ -23,7 +22,6 @@ public class EntryPoint {
 	private Bitfinex bitfinex = null;
 	private Bitflyer bitflyer = null;
 	private Bithumb bithumb = null;
-	private Bitmarket bitmarket = null;
 	private Bitmex bitmex = null;
 	private Bitso bitso = null;
 	private Bitstamp bitstamp = null;
@@ -81,15 +79,12 @@ public class EntryPoint {
 	private Paribu paribu = null;
 	private Paymium paymium = null;
 	private Poloniex poloniex = null;
-	private Quadrigacx quadrigacx = null;
 	private Quoine quoine = null;
 	private Ripple ripple = null;
 	private Therock therock = null;
 	private Truefx truefx = null;
 	private Upbit upbit = null;
 	private Vaultoro vaultoro = null;
-	private Vircurex vircurex = null;
-	private Wex wex = null;
 	private Yobit yobit = null;
 	private Zaif zaif = null;
 
@@ -146,10 +141,6 @@ public class EntryPoint {
 	 */
 	public GenericExchange getExchange(Exchanges ex) {
 		switch (ex) {
-		case ABUCOINS:
-			if (this.abucoins == null)
-				this.abucoins = new Abucoins();
-			return this.abucoins;
 		case ACX:
 			if (this.acx == null)
 				this.acx = new Acx();
@@ -206,10 +197,6 @@ public class EntryPoint {
 			if (this.bithumb == null)
 				this.bithumb = new Bithumb();
 			return this.bithumb;
-		case BITMARKET:
-			if (this.bitmarket == null)
-				this.bitmarket = new Bitmarket();
-			return this.bitmarket;
 		case BITMEX:
 			if (this.bitmex == null)
 				this.bitmex = new Bitmex();
@@ -434,10 +421,6 @@ public class EntryPoint {
 			if (this.poloniex == null)
 				this.poloniex = new Poloniex();
 			return this.poloniex;
-		case QUADRIGACX:
-			if (this.quadrigacx == null)
-				this.quadrigacx = new Quadrigacx();
-			return this.quadrigacx;
 		case QUOINE:
 			if (this.quoine == null)
 				this.quoine = new Quoine();
@@ -462,14 +445,6 @@ public class EntryPoint {
 			if (this.vaultoro == null)
 				this.vaultoro = new Vaultoro();
 			return this.vaultoro;
-		case VIRCUREX:
-			if (this.vircurex == null)
-				this.vircurex = new Vircurex();
-			return this.vircurex;
-		case WEX:
-			if (this.wex == null)
-				this.wex = new Wex();
-			return this.wex;
 		case YOBIT:
 			if (this.yobit == null)
 				this.yobit = new Yobit();
