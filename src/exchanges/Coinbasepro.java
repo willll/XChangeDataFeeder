@@ -1,10 +1,13 @@
 package exchanges;
 
 import org.knowm.xchange.ExchangeFactory;
-import org.knowm.xchange.coinbasepro.CoinbaseProExchange;
+import info.bitrich.xchangestream.coinbasepro.CoinbaseProStreamingExchange;
+import info.bitrich.xchangestream.core.StreamingExchangeFactory;
 
 public class Coinbasepro extends GenericStreamingExchange {
 	public Coinbasepro() {
-		this.exchange = ExchangeFactory.INSTANCE.createExchange(CoinbaseProExchange.class.getName());
+		this.exchange = ExchangeFactory.INSTANCE.createExchange(CoinbaseProStreamingExchange.class.getName());
+		this.streamingExchange = StreamingExchangeFactory.INSTANCE
+				.createExchange(CoinbaseProStreamingExchange.class.getName());
 	}
 }

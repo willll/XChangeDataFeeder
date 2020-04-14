@@ -16,6 +16,7 @@ public class EntryPoint {
 	private Bitbay bitbay = null;
 	private Bitcoinaverage bitcoinaverage = null;
 	private Bitcoincharts bitcoincharts = null;
+	private Bitcoincore bitcoincore = null;
 	private Bitcoinde bitcoinde = null;
 	private Bitcoinium bitcoinium = null;
 	private Bitcointoyou bitcointoyou = null;
@@ -43,8 +44,10 @@ public class EntryPoint {
 	private Coinbase coinbase = null;
 	private Coinbasepro coinbasepro = null;
 	private Coinbene coinbene = null;
+	private Coindeal coindeal = null;
 	private Coindirect coindirect = null;
 	private Coinegg coinegg = null;
+	private Coinex coinex = null;
 	private Coinfloor coinfloor = null;
 	private Coingi coingi = null;
 	private Coinmarketcap coinmarketcap = null;
@@ -52,15 +55,20 @@ public class EntryPoint {
 	private Coinone coinone = null;
 	private Coinsuper coinsuper = null;
 	private Cryptofacilities cryptofacilities = null;
+	private Cryptonit cryptonit = null;
 	private Cryptopia cryptopia = null;
+	private Cryptowatch cryptowatch = null;
+	private Deribit deribit = null;
 	private Dragonex dragonex = null;
 	private Dsx dsx = null;
 	private Dvchain dvchain = null;
+	private Enigma enigma = null;
 	private Exmo exmo = null;
 	private Exx exx = null;
 	private Fcoin fcoin = null;
 	private Gateio gateio = null;
 	private Gemini gemini = null;
+	private Globitex globitex = null;
 	private Hitbtc hitbtc = null;
 	private Huobi huobi = null;
 	private Idex idex = null;
@@ -71,9 +79,12 @@ public class EntryPoint {
 	private Kucoin kucoin = null;
 	private Kuna kuna = null;
 	private Lakebtc lakebtc = null;
+	private Latoken latoken = null;
+	private Lgo lgo = null;
 	private Liqui liqui = null;
 	private Livecoin livecoin = null;
 	private Luno luno = null;
+	private Lykke lykke = null;
 	private Mercadobitcoin mercadobitcoin = null;
 	private Okcoin okcoin = null;
 	private Paribu paribu = null;
@@ -82,6 +93,7 @@ public class EntryPoint {
 	private Quoine quoine = null;
 	private Ripple ripple = null;
 	private Therock therock = null;
+	private Tradeogre tradeogre = null;
 	private Truefx truefx = null;
 	private Upbit upbit = null;
 	private Vaultoro vaultoro = null;
@@ -93,24 +105,25 @@ public class EntryPoint {
 	 *
 	 */
 	public enum Exchanges {
-		ABUCOINS("Abucoins"), ACX("Acx"), ANX("Anx"), BANKERA("Bankera"), BIBOX("Bibox"), BINANCE("Binance"),
-		BITBAY("Bitbay"), BITCOINAVERAGE("Bitcoinaverage"), BITCOINCHARTS("Bitcoincharts"), BITCOINCORE("Bitcoincore"),
+		ACX("Acx"), ANX("Anx"), BANKERA("Bankera"), BIBOX("Bibox"), BINANCE("Binance"), BITBAY("Bitbay"),
+		BITCOINAVERAGE("Bitcoinaverage"), BITCOINCHARTS("Bitcoincharts"), BITCOINCORE("Bitcoincore"),
 		BITCOINDE("Bitcoinde"), BITCOINIUM("Bitcoinium"), BITCOINTOYOU("Bitcointoyou"), BITFINEX("Bitfinex"),
-		BITFLYER("Bitflyer"), BITHUMB("Bithumb"), BITMARKET("Bitmarket"), BITMEX("Bitmex"), BITSO("Bitso"),
-		BITSTAMP("Bitstamp"), BITTREX("Bittrex"), BITY("Bity"), BITZ("Bitz"), BL3P("Bl3p"), BLEUTRADE("Bleutrade"),
-		BLOCKCHAIN("Blockchain"), BTCC("Btcc"), BTCMARKETS("Btcmarkets"), BTCTRADE("Btctrade"), BTCTURK("Btcturk"),
-		BX("Bx"), CAMPBX("Campbx"), CCEX("Ccex"), CEXIO("Cexio"), COBINHOOD("Cobinhood"), COINBASE("Coinbase"),
-		COINBASEPRO("Coinbasepro"), COINBENE("Coinbene"), COINDEAL("Coindeal"), COINDIRECT("Coindirect"),
-		COINEGG("Coinegg"), COINEX("Coinex"), COINFLOOR("Coinfloor"), COINGI("Coingi"), COINMARKETCAP("Coinmarketcap"),
-		COINMATE("Coinmate"), COINONE("Coinone"), COINSUPER("Coinsuper"), CRYPTOFACILITIES("Cryptofacilities"),
-		CRYPTONIT("Cryptonit"), CRYPTOPIA("Cryptopia"), DRAGONEX("Dragonex"), DSX("Dsx"), DVCHAIN("Dvchain"),
-		EXMO("Exmo"), EXX("Exx"), FCOIN("Fcoin"), GATECOIN("Gatecoin"), GATEIO("Gateio"), GEMINI("Gemini"),
-		GLOBITEX("Globitex"), HITBTC("Hitbtc"), HUOBI("Huobi"), IDEX("Idex"), ITBIT("Itbit"), KOINEKS("Koineks"),
-		KOINIM("Koinim"), KRAKEN("Kraken"), KUCOIN("Kucoin"), KUNA("Kuna"), LAKEBTC("Lakebtc"), LIVECOIN("Livecoin"),
-		LUNO("Luno"), LYKKE("Lykke"), MERCADOBITCOIN("Mercadobitcoin"), OKCOIN("Okcoin"),
-		OPENEXCHANGERATES("Openexchangerates"), PARIBU("Paribu"), PAYMIUM("Paymium"), POLONIEX("Poloniex"),
-		QUADRIGACX("Quadrigacx"), QUOINE("Quoine"), RIPPLE("Ripple"), THEROCK("Therock"), TRUEFX("Truefx"),
-		UPBIT("Upbit"), VAULTORO("Vaultoro"), VIRCUREX("Vircurex"), WEX("Wex"), YOBIT("Yobit"), ZAIF("Zaif");
+		BITFLYER("Bitflyer"), BITHUMB("Bithumb"), BITMEX("Bitmex"), BITSO("Bitso"), BITSTAMP("Bitstamp"),
+		BITTREX("Bittrex"), BITY("Bity"), BITZ("Bitz"), BL3P("Bl3p"), BLEUTRADE("Bleutrade"), BLOCKCHAIN("Blockchain"),
+		BTCC("Btcc"), BTCMARKETS("Btcmarkets"), BTCTRADE("Btctrade"), BTCTURK("Btcturk"), BX("Bx"), CAMPBX("Campbx"),
+		CCEX("Ccex"), CEXIO("Cexio"), COBINHOOD("Cobinhood"), COINBASE("Coinbase"), COINBASEPRO("Coinbasepro"),
+		COINBENE("Coinbene"), COINDEAL("Coindeal"), COINDIRECT("Coindirect"), COINEGG("Coinegg"), COINEX("Coinex"),
+		COINFLOOR("Coinfloor"), COINGI("Coingi"), COINMARKETCAP("Coinmarketcap"), COINMATE("Coinmate"),
+		COINONE("Coinone"), COINSUPER("Coinsuper"), CRYPTOFACILITIES("Cryptofacilities"), CRYPTONIT("Cryptonit"),
+		CRYPTOPIA("Cryptopia"), CRYPTOWATCH("Cryptowatch"), DERIBIT("Deribit"), DRAGONEX("Dragonex"), DSX("Dsx"),
+		DVCHAIN("Dvchain"), ENIGMA("Enigma"), EXMO("Exmo"), EXX("Exx"), FCOIN("Fcoin"), GATEIO("Gateio"),
+		GEMINI("Gemini"), GLOBITEX("Globitex"), HITBTC("Hitbtc"), HUOBI("Huobi"), IDEX("Idex"),
+		INDEPENDENTRESERVE("Independentreserve"), ITBIT("Itbit"), KOINEKS("Koineks"), KOINIM("Koinim"),
+		KRAKEN("Kraken"), KUCOIN("Kucoin"), KUNA("Kuna"), LAKEBTC("Lakebtc"), LATOKEN("Latoken"), LGO("Lgo"),
+		LIQUI("Liqui"), LIVECOIN("Livecoin"), LUNO("Luno"), LYKKE("Lykke"), MERCADOBITCOIN("Mercadobitcoin"),
+		OKCOIN("Okcoin"), OPENEXCHANGERATES("Openexchangerates"), PARIBU("Paribu"), PAYMIUM("Paymium"),
+		POLONIEX("Poloniex"), QUOINE("Quoine"), RIPPLE("Ripple"), SIMULATED("Simulated"), THEROCK("Therock"),
+		TRADEOGRE("Tradeogre"), TRUEFX("Truefx"), UPBIT("Upbit"), VAULTORO("Vaultoro"), YOBIT("Yobit"), ZAIF("Zaif");
 
 		private final String exchangeName;
 
@@ -173,6 +186,10 @@ public class EntryPoint {
 			if (this.bitcoincharts == null)
 				this.bitcoincharts = new Bitcoincharts();
 			return this.bitcoincharts;
+		case BITCOINCORE:
+			if (this.bitcoincore == null)
+				this.bitcoincore = new Bitcoincore();
+			return this.bitcoincore;
 		case BITCOINDE:
 			if (this.bitcoinde == null)
 				this.bitcoinde = new Bitcoinde();
@@ -281,6 +298,10 @@ public class EntryPoint {
 			if (this.coinbene == null)
 				this.coinbene = new Coinbene();
 			return this.coinbene;
+		case COINDEAL:
+			if (this.coindeal == null)
+				this.coindeal = new Coindeal();
+			return this.coindeal;
 		case COINDIRECT:
 			if (this.coindirect == null)
 				this.coindirect = new Coindirect();
@@ -289,6 +310,10 @@ public class EntryPoint {
 			if (this.coinegg == null)
 				this.coinegg = new Coinegg();
 			return this.coinegg;
+		case COINEX:
+			if (this.coinex == null)
+				this.coinex = new Coinex();
+			return this.coinex;
 		case COINFLOOR:
 			if (this.coinfloor == null)
 				this.coinfloor = new Coinfloor();
@@ -317,10 +342,22 @@ public class EntryPoint {
 			if (this.cryptofacilities == null)
 				this.cryptofacilities = new Cryptofacilities();
 			return this.cryptofacilities;
+		case CRYPTONIT:
+			if (this.cryptonit == null)
+				this.cryptonit = new Cryptonit();
+			return this.cryptonit;
 		case CRYPTOPIA:
 			if (this.cryptopia == null)
 				this.cryptopia = new Cryptopia();
 			return this.cryptopia;
+		case CRYPTOWATCH:
+			if (this.cryptowatch == null)
+				this.cryptowatch = new Cryptowatch();
+			return this.cryptowatch;
+		case DERIBIT:
+			if (this.deribit == null)
+				this.deribit = new Deribit();
+			return this.deribit;
 		case DRAGONEX:
 			if (this.dragonex == null)
 				this.dragonex = new Dragonex();
@@ -333,6 +370,10 @@ public class EntryPoint {
 			if (this.dvchain == null)
 				this.dvchain = new Dvchain();
 			return this.dvchain;
+		case ENIGMA:
+			if (this.enigma == null)
+				this.enigma = new Enigma();
+			return this.enigma;
 		case EXMO:
 			if (this.exmo == null)
 				this.exmo = new Exmo();
@@ -353,6 +394,10 @@ public class EntryPoint {
 			if (this.gemini == null)
 				this.gemini = new Gemini();
 			return this.gemini;
+		case GLOBITEX:
+			if (this.globitex == null)
+				this.globitex = new Globitex();
+			return this.globitex;
 		case HITBTC:
 			if (this.hitbtc == null)
 				this.hitbtc = new Hitbtc();
@@ -393,6 +438,18 @@ public class EntryPoint {
 			if (this.lakebtc == null)
 				this.lakebtc = new Lakebtc();
 			return this.lakebtc;
+		case LATOKEN:
+			if (this.latoken == null)
+				this.latoken = new Latoken();
+			return this.latoken;
+		case LGO:
+			if (this.lgo == null)
+				this.lgo = new Lgo();
+			return this.lgo;
+		case LIQUI:
+			if (this.liqui == null)
+				this.liqui = new Liqui();
+			return this.liqui;
 		case LIVECOIN:
 			if (this.livecoin == null)
 				this.livecoin = new Livecoin();
@@ -401,6 +458,10 @@ public class EntryPoint {
 			if (this.luno == null)
 				this.luno = new Luno();
 			return this.luno;
+		case LYKKE:
+			if (this.lykke == null)
+				this.lykke = new Lykke();
+			return this.lykke;
 		case MERCADOBITCOIN:
 			if (this.mercadobitcoin == null)
 				this.mercadobitcoin = new Mercadobitcoin();
@@ -433,6 +494,10 @@ public class EntryPoint {
 			if (this.therock == null)
 				this.therock = new Therock();
 			return this.therock;
+		case TRADEOGRE:
+			if (this.tradeogre == null)
+				this.tradeogre = new Tradeogre();
+			return this.tradeogre;
 		case TRUEFX:
 			if (this.truefx == null)
 				this.truefx = new Truefx();

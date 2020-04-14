@@ -1,7 +1,7 @@
 package exchanges;
 
 import org.knowm.xchange.ExchangeFactory;
-import org.knowm.xchange.anx.v2.ANXExchange;;
+import org.knowm.xchange.anx.v2.ANXExchange;
 
 public class Anx extends GenericExchange {
 	public Anx() {

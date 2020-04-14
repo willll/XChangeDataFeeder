@@ -1,7 +1,7 @@
 package exchanges;
 
 import org.knowm.xchange.ExchangeFactory;
-import org.knowm.xchange.therock.TheRockExchange;;
+import org.knowm.xchange.therock.TheRockExchange;
 
 public class Therock extends GenericExchange {
 	public Therock() {

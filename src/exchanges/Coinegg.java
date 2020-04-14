@@ -1,7 +1,7 @@
 package exchanges;
 
 import org.knowm.xchange.ExchangeFactory;
-import org.knowm.xchange.coinegg.CoinEggExchange;;
+import org.knowm.xchange.coinegg.CoinEggExchange;
 
 public class Coinegg extends GenericExchange {
 	public Coinegg() {

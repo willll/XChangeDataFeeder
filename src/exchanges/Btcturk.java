@@ -1,7 +1,7 @@
 package exchanges;
 
 import org.knowm.xchange.ExchangeFactory;
-import org.knowm.xchange.btcturk.BTCTurkExchange;;
+import org.knowm.xchange.btcturk.BTCTurkExchange;
 
 public class Btcturk extends GenericExchange {
 	public Btcturk() {

@@ -2,7 +2,7 @@ package exchanges.factories;
 
 import exchanges.factories.EntryPoint.Exchanges;
 
-public class BankeraFactory extends GenericFactory {
+public class BankeraFactory extends GenericStreamingFactory {
 
 	BankeraFactory() {
 		exchange = Exchanges.BANKERA;

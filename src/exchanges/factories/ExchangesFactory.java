@@ -394,6 +394,22 @@ public class ExchangesFactory {
 		return cryptopiaFactory;
 	}
 
+	private static CryptowatchFactory cryptowatchFactory = null;
+
+	public static CryptowatchFactory getCryptowatchFactory() {
+		if (cryptowatchFactory == null)
+			cryptowatchFactory = new CryptowatchFactory();
+		return cryptowatchFactory;
+	}
+
+	private static DeribitFactory deribitFactory = null;
+
+	public static DeribitFactory getDeribitFactory() {
+		if (deribitFactory == null)
+			deribitFactory = new DeribitFactory();
+		return deribitFactory;
+	}
+
 	private static DragonexFactory dragonexFactory = null;
 
 	public static DragonexFactory getDragonexFactory() {
@@ -416,6 +432,14 @@ public class ExchangesFactory {
 		if (dvchainFactory == null)
 			dvchainFactory = new DvchainFactory();
 		return dvchainFactory;
+	}
+
+	private static EnigmaFactory enigmaFactory = null;
+
+	public static EnigmaFactory getEnigmaFactory() {
+		if (enigmaFactory == null)
+			enigmaFactory = new EnigmaFactory();
+		return enigmaFactory;
 	}
 
 	private static ExmoFactory exmoFactory = null;
@@ -546,6 +570,30 @@ public class ExchangesFactory {
 		return lakebtcFactory;
 	}
 
+	private static LatokenFactory latokenFactory = null;
+
+	public static LatokenFactory getLatokenFactory() {
+		if (latokenFactory == null)
+			latokenFactory = new LatokenFactory();
+		return latokenFactory;
+	}
+
+	private static LgoFactory lgoFactory = null;
+
+	public static LgoFactory getLgoFactory() {
+		if (lgoFactory == null)
+			lgoFactory = new LgoFactory();
+		return lgoFactory;
+	}
+
+	private static LiquiFactory liquiFactory = null;
+
+	public static LiquiFactory getLiquiFactory() {
+		if (liquiFactory == null)
+			liquiFactory = new LiquiFactory();
+		return liquiFactory;
+	}
+
 	private static LivecoinFactory livecoinFactory = null;
 
 	public static LivecoinFactory getLivecoinFactory() {
@@ -584,14 +632,6 @@ public class ExchangesFactory {
 		if (okcoinFactory == null)
 			okcoinFactory = new OkcoinFactory();
 		return okcoinFactory;
-	}
-
-	private static OpenexchangeratesFactory openexchangeratesFactory = null;
-
-	public static OpenexchangeratesFactory getOpenexchangeratesFactory() {
-		if (openexchangeratesFactory == null)
-			openexchangeratesFactory = new OpenexchangeratesFactory();
-		return openexchangeratesFactory;
 	}
 
 	private static ParibuFactory paribuFactory = null;
@@ -642,6 +682,14 @@ public class ExchangesFactory {
 		return therockFactory;
 	}
 
+	private static TradeogreFactory tradeogreFactory = null;
+
+	public static TradeogreFactory getTradeogreFactory() {
+		if (tradeogreFactory == null)
+			tradeogreFactory = new TradeogreFactory();
+		return tradeogreFactory;
+	}
+
 	private static TruefxFactory truefxFactory = null;
 
 	public static TruefxFactory getTruefxFactory() {
@@ -681,5 +729,4 @@ public class ExchangesFactory {
 			zaifFactory = new ZaifFactory();
 		return zaifFactory;
 	}
-
 }

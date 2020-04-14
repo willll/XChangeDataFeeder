@@ -1,7 +1,7 @@
 package exchanges;
 
 import org.knowm.xchange.ExchangeFactory;
-import org.knowm.xchange.btcc.BTCCExchange;;
+import org.knowm.xchange.btcc.BTCCExchange;
 
 public class Btcc extends GenericExchange {
 	public Btcc() {

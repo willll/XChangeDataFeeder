@@ -1,7 +1,7 @@
 package exchanges;
 
 import org.knowm.xchange.ExchangeFactory;
-import org.knowm.xchange.coinbase.v2.CoinbaseExchange;
+import org.knowm.xchange.coinbase.CoinbaseExchange;
 
 public class Coinbase extends GenericExchange {
 	public Coinbase() {

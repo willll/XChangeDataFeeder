@@ -2,7 +2,7 @@ package exchanges.factories;
 
 import exchanges.factories.EntryPoint.Exchanges;
 
-public class KrakenFactory extends GenericFactory {
+public class KrakenFactory extends GenericStreamingFactory {
 
 	KrakenFactory() {
 		exchange = Exchanges.KRAKEN;

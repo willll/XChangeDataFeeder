@@ -11,8 +11,5 @@ public class Bitstamp extends GenericStreamingExchange {
 		this.exchange = ExchangeFactory.INSTANCE.createExchange(BitstampExchange.class.getName());
 		this.streamingExchange = StreamingExchangeFactory.INSTANCE
 				.createExchange(BitstampStreamingExchange.class.getName());
-
-		// Not supported : https://github.com/bitrich-info/xchange-stream
-		this.tickerSupported = false;
 	}
 }

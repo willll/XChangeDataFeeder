@@ -230,12 +230,22 @@
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
+			<artifactId>xchange-coindeal</artifactId>
+			<version>4.4.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-coindirect</artifactId>
 			<version>4.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-coinegg</artifactId>
+			<version>4.4.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.knowm.xchange</groupId>
+			<artifactId>xchange-coinex</artifactId>
 			<version>4.4.2</version>
 		</dependency>
 		<dependency>
