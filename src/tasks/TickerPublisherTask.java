@@ -2,9 +2,7 @@ package tasks;
 
 import java.io.IOException;
 import java.lang.reflect.UndeclaredThrowableException;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.knowm.xchange.currency.CurrencyPair;
@@ -28,7 +26,7 @@ import exchanges.IExchange;
  */
 public class TickerPublisherTask<T> extends PublisherTask<T> implements Runnable {
 
-	public TickerPublisherTask(final String id, final T exchange, ArrayList<CurrencyPair> currencyPairs,
+	public TickerPublisherTask(final String id, final T exchange, Set<CurrencyPair> currencyPairs,
 			final ZContext context, final long refreshRate) {
 		super(id, exchange, currencyPairs, context, refreshRate);
 	}

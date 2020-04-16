@@ -1,6 +1,6 @@
 package tasks;
 
-import java.util.ArrayList;
+import java.util.Set;
 
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.Ticker;
@@ -25,7 +25,7 @@ public class TickerPublisherStreamingTask<T> extends PublisherStreamingTask<T> i
 	 * @param context
 	 * @param streamingExchange
 	 */
-	public TickerPublisherStreamingTask(final String id, final T exchange, ArrayList<CurrencyPair> currencyPairs,
+	public TickerPublisherStreamingTask(final String id, final T exchange, Set<CurrencyPair> currencyPairs,
 			final ZContext context, final StreamingExchange streamingExchange) {
 		super(id, exchange, currencyPairs, context, streamingExchange);
 	}

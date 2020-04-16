@@ -1,6 +1,6 @@
 package tasks;
 
-import java.util.ArrayList;
+import java.util.Set;
 
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.OrderBook;
@@ -17,7 +17,7 @@ import info.bitrich.xchangestream.core.StreamingExchange;
  */
 public class OrderBookPublisherStreamingTask<T> extends PublisherStreamingTask<T> implements Runnable {
 
-	public OrderBookPublisherStreamingTask(final String id, final T exchange, ArrayList<CurrencyPair> currencyPairs,
+	public OrderBookPublisherStreamingTask(final String id, final T exchange, Set<CurrencyPair> currencyPairs,
 			final ZContext context, final StreamingExchange streamingExchange) {
 		super(id, exchange, currencyPairs, context, streamingExchange);
 	}

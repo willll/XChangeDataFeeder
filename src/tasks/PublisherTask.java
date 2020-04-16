@@ -1,6 +1,6 @@
 package tasks;
 
-import java.util.ArrayList;
+import java.util.Set;
 
 import org.knowm.xchange.currency.CurrencyPair;
 import org.zeromq.ZContext;
@@ -26,7 +26,7 @@ public class PublisherTask<T> implements ITask, ILogger {
 	 * @param context
 	 */
 	@SuppressWarnings("deprecation")
-	public PublisherTask(final String id, final T exchange, ArrayList<CurrencyPair> currencyPairs,
+	public PublisherTask(final String id, final T exchange, Set<CurrencyPair> currencyPairs,
 			final ZContext context, final long refreshRate) {
 		super();
 		this.id = id;
@@ -49,7 +49,7 @@ public class PublisherTask<T> implements ITask, ILogger {
 
 	protected String id;
 	protected T exchange;
-	protected ArrayList<CurrencyPair> currencyPairs;
+	protected Set<CurrencyPair> currencyPairs;
 	protected ObjectMapper mapper;
 	protected long threadId;
 	protected String exchangeName;

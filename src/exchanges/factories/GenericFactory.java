@@ -2,6 +2,8 @@ package exchanges.factories;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.knowm.xchange.currency.CurrencyPair;
 import org.zeromq.ZContext;
@@ -27,7 +29,7 @@ public class GenericFactory implements IFactory, ILogger {
 	 */
 	@SuppressWarnings("unused")
 	protected static class ticker_publisher_task<T> extends TickerPublisherTask<T> implements Runnable {
-		public ticker_publisher_task(T exchange, ArrayList<CurrencyPair> currencyPair, ZContext context,
+		public ticker_publisher_task(T exchange, Set<CurrencyPair> currencyPair, ZContext context,
 				final String pub, final long refresh_rate) {
 
 			super(pub, exchange, currencyPair, context, refresh_rate);
@@ -41,7 +43,7 @@ public class GenericFactory implements IFactory, ILogger {
 	 */
 	@SuppressWarnings("unused")
 	protected static class Orderbook_publisher_task<T> extends OrderBookPublisherTask<T> implements Runnable {
-		public Orderbook_publisher_task(T exchange, ArrayList<CurrencyPair> currencyPair, ZContext context,
+		public Orderbook_publisher_task(T exchange, Set<CurrencyPair> currencyPair, ZContext context,
 				final String pub, final long refresh_rate) {
 
 			super(pub, exchange, currencyPair, context, refresh_rate);
@@ -56,7 +58,7 @@ public class GenericFactory implements IFactory, ILogger {
 	 * EntryPoint, org.zeromq.ZContext, java.util.ArrayList)
 	 */
 	@SuppressWarnings("unused")
-	public ArrayList<Thread> create_orderbook_feeders(EntryPoint ep, ZContext context, ArrayList<CurrencyPair> cp)
+	public ArrayList<Thread> create_orderbook_feeders(EntryPoint ep, ZContext context, Set<CurrencyPair> cp)
 			throws IOException {
 		int max_cp_per_thread = Constants.CP_PER_THREAD;
 		if (!can_handle_multiple_threads)
@@ -65,8 +67,13 @@ public class GenericFactory implements IFactory, ILogger {
 		ArrayList<Thread> thds = new ArrayList<Thread>();
 		for (; cp.size() != 0;) {
 			int lastElt = cp.size() > max_cp_per_thread ? max_cp_per_thread : cp.size();
-			ArrayList<CurrencyPair> tmp = new ArrayList<CurrencyPair>(cp.subList(0, lastElt));
-			cp.subList(0, lastElt).clear();
+			Set<CurrencyPair> tmp = cp.stream()
+				    .limit(lastElt)
+				    .collect(Collectors.toSet());
+			
+			cp = cp.stream()
+				   .skip(lastElt) // the offset
+				   .collect(Collectors.toSet());
 			logger.debug(exchange.name() + " : Create new Thread : " + tmp.toString());
 			Thread thd = new Thread(new Orderbook_publisher_task<exchanges.IExchange>(ep.getExchange(exchange), tmp,
 					context, orderbook_pub, refresh_rate));
@@ -83,7 +90,7 @@ public class GenericFactory implements IFactory, ILogger {
 	 * EntryPoint, org.zeromq.ZContext, java.util.ArrayList)
 	 */
 	@SuppressWarnings("unused")
-	public ArrayList<Thread> create_ticker_feeders(EntryPoint ep, ZContext context, ArrayList<CurrencyPair> cp)
+	public ArrayList<Thread> create_ticker_feeders(EntryPoint ep, ZContext context, Set<CurrencyPair> cp)
 			throws IOException {
 
 		return create_ticker_feeders(ep, context, cp, this.exchange, this.ticker_pub);
@@ -99,7 +106,7 @@ public class GenericFactory implements IFactory, ILogger {
 	 * @throws IOException
 	 */
 	@SuppressWarnings("unused")
-	protected ArrayList<Thread> create_ticker_feeders(EntryPoint ep, ZContext context, ArrayList<CurrencyPair> cp,
+	protected ArrayList<Thread> create_ticker_feeders(EntryPoint ep, ZContext context, Set<CurrencyPair> cp,
 			Exchanges exchange, String ticker_pub) throws IOException {
 
 		int max_cp_per_thread = Constants.CP_PER_THREAD;
@@ -109,8 +116,12 @@ public class GenericFactory implements IFactory, ILogger {
 
 		for (; cp.size() != 0;) {
 			int lastElt = cp.size() > max_cp_per_thread ? max_cp_per_thread : cp.size();
-			ArrayList<CurrencyPair> tmp = new ArrayList<CurrencyPair>(cp.subList(0, lastElt));
-			cp.subList(0, lastElt).clear();
+			Set<CurrencyPair> tmp = cp.stream()
+				    .limit(lastElt)
+				    .collect(Collectors.toSet());
+			cp = cp.stream()
+				   .skip(lastElt) // the offset
+				   .collect(Collectors.toSet());
 			logger.debug(exchange.name() + " : Create new Thread : " + tmp.toString());
 			Thread thd = new Thread(new ticker_publisher_task<exchanges.IExchange>(ep.getExchange(exchange), tmp,
 					context, ticker_pub, refresh_rate));

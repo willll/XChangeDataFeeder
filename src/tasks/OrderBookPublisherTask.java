@@ -1,7 +1,7 @@
 package tasks;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Set;
 
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.OrderBook;
@@ -19,7 +19,7 @@ import exchanges.IExchange;
  */
 public class OrderBookPublisherTask<T> extends PublisherTask<T> implements Runnable {
 
-	public OrderBookPublisherTask(final String id, final T exchange, ArrayList<CurrencyPair> currencyPairs,
+	public OrderBookPublisherTask(final String id, final T exchange, Set<CurrencyPair> currencyPairs,
 			final ZContext context, final long refreshRate) {
 		super(id, exchange, currencyPairs, context, refreshRate);
 	}

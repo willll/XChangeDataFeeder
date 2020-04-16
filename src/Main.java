@@ -1,25 +1,25 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 import org.knowm.xchange.currency.CurrencyPair;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.zeromq.ZContext;
 import org.zeromq.ZMQ;
 import org.zeromq.ZMQ.Socket;
 
-import org.apache.commons.cli.*;
-
 import exchanges.factories.EntryPoint;
 import exchanges.factories.EntryPoint.Exchanges;
 import exchanges.factories.ExchangesFactory;
-import info.bitrich.xchangestream.core.ProductSubscription;
-import info.bitrich.xchangestream.core.ProductSubscription.ProductSubscriptionBuilder;
-import info.bitrich.xchangestream.core.StreamingExchange;
-import tasks.OrderBookPublisherStreamingTask;
-import tasks.TickerPublisherStreamingTask;
 import utils.Config;
 import utils.Constants;
 
@@ -28,7 +28,7 @@ public class Main {
 
 	private static Logger logger = LoggerFactory.getLogger("Console");
 
-	static void displayCurrencyPairs(Exchanges xch, ArrayList<CurrencyPair> cp) {
+	static void displayCurrencyPairs(Exchanges xch, Set<CurrencyPair> cp) {
 		System.out.println (xch + " ;\n");
 		for (CurrencyPair currencyPair : cp) {
 			System.out.print(currencyPair + ", ");
@@ -75,7 +75,7 @@ public class Main {
 		workers.bind("inproc://workers");
 
 		String scp = Config.getInstance().get(Constants.currency_pairs);
-		ArrayList<CurrencyPair> cp = new ArrayList<>();
+		Set<CurrencyPair> cp = new HashSet<>();
 		if (scp != null) {
 			for(String pair : scp.split(",")) {
 	            cp.add(new CurrencyPair(pair));
@@ -91,10 +91,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.ACX, ep.getExchange(Exchanges.ACX).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Acx_cp = cp;
+                Set<CurrencyPair> Acx_cp = cp;
                 String bscp = Config.getInstance().get(Constants.acx_currency_pairs);
                 if(bscp != null) {
-                        Acx_cp = new ArrayList<>();
+                        Acx_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Acx_cp.add(new CurrencyPair(pair));
                         }
@@ -128,10 +128,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.ANX, ep.getExchange(Exchanges.ANX).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Anx_cp = cp;
+                Set<CurrencyPair> Anx_cp = cp;
                 String bscp = Config.getInstance().get(Constants.anx_currency_pairs);
                 if(bscp != null) {
-                        Anx_cp = new ArrayList<>();
+                        Anx_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Anx_cp.add(new CurrencyPair(pair));
                         }
@@ -166,10 +166,10 @@ public class Main {
 				displayCurrencyPairs(Exchanges.BANKERA, ep.getExchange(Exchanges.BANKERA).getCurrencyPairs());
 			} else {
 
-                ArrayList<CurrencyPair> Bankera_cp = cp;
+                Set<CurrencyPair> Bankera_cp = cp;
                 String bscp = Config.getInstance().get(Constants.bankera_currency_pairs);
                 if(bscp != null) {
-                        Bankera_cp = new ArrayList<>();
+                        Bankera_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Bankera_cp.add(new CurrencyPair(pair));
                         }
@@ -203,10 +203,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.BIBOX, ep.getExchange(Exchanges.BIBOX).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Bibox_cp = cp;
+                Set<CurrencyPair> Bibox_cp = cp;
                 String bscp = Config.getInstance().get(Constants.bibox_currency_pairs);
                 if(bscp != null) {
-                        Bibox_cp = new ArrayList<>();
+                        Bibox_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Bibox_cp.add(new CurrencyPair(pair));
                         }
@@ -241,10 +241,10 @@ public class Main {
 				displayCurrencyPairs(Exchanges.BINANCE, ep.getExchange(Exchanges.BINANCE).getCurrencyPairs());
 			} else {
 
-                ArrayList<CurrencyPair> Binance_cp = cp;
+                Set<CurrencyPair> Binance_cp = cp;
                 String bscp = Config.getInstance().get(Constants.binance_currency_pairs);
                 if(bscp != null) {
-                        Binance_cp = new ArrayList<>();
+                        Binance_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Binance_cp.add(new CurrencyPair(pair));
                         }
@@ -278,10 +278,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.BITBAY, ep.getExchange(Exchanges.BITBAY).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Bitbay_cp = cp;
+                Set<CurrencyPair> Bitbay_cp = cp;
                 String bscp = Config.getInstance().get(Constants.bitbay_currency_pairs);
                 if(bscp != null) {
-                        Bitbay_cp = new ArrayList<>();
+                        Bitbay_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Bitbay_cp.add(new CurrencyPair(pair));
                         }
@@ -315,10 +315,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.BITBAY, ep.getExchange(Exchanges.BITBAY).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Bitbay_cp = cp;
+                Set<CurrencyPair> Bitbay_cp = cp;
                 String bscp = Config.getInstance().get(Constants.bitbay_currency_pairs);
                 if(bscp != null) {
-                        Bitbay_cp = new ArrayList<>();
+                        Bitbay_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Bitbay_cp.add(new CurrencyPair(pair));
                         }
@@ -352,10 +352,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.BITCOINAVERAGE, ep.getExchange(Exchanges.BITCOINAVERAGE).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Bitcoinaverage_cp = cp;
+                Set<CurrencyPair> Bitcoinaverage_cp = cp;
                 String bscp = Config.getInstance().get(Constants.bitcoinaverage_currency_pairs);
                 if(bscp != null) {
-                        Bitcoinaverage_cp = new ArrayList<>();
+                        Bitcoinaverage_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Bitcoinaverage_cp.add(new CurrencyPair(pair));
                         }
@@ -389,10 +389,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.BITCOINCHARTS, ep.getExchange(Exchanges.BITCOINCHARTS).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Bitcoincharts_cp = cp;
+                Set<CurrencyPair> Bitcoincharts_cp = cp;
                 String bscp = Config.getInstance().get(Constants.bitcoincharts_currency_pairs);
                 if(bscp != null) {
-                        Bitcoincharts_cp = new ArrayList<>();
+                        Bitcoincharts_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Bitcoincharts_cp.add(new CurrencyPair(pair));
                         }
@@ -426,10 +426,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.BITCOINCORE, ep.getExchange(Exchanges.BITCOINCORE).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Bitcoincore_cp = cp;
+                Set<CurrencyPair> Bitcoincore_cp = cp;
                 String bscp = Config.getInstance().get(Constants.bitcoincore_currency_pairs);
                 if(bscp != null) {
-                        Bitcoincore_cp = new ArrayList<>();
+                        Bitcoincore_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Bitcoincore_cp.add(new CurrencyPair(pair));
                         }
@@ -463,10 +463,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.BITCOINDE, ep.getExchange(Exchanges.BITCOINDE).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Bitcoinde_cp = cp;
+                Set<CurrencyPair> Bitcoinde_cp = cp;
                 String bscp = Config.getInstance().get(Constants.bitcoinde_currency_pairs);
                 if(bscp != null) {
-                        Bitcoinde_cp = new ArrayList<>();
+                        Bitcoinde_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Bitcoinde_cp.add(new CurrencyPair(pair));
                         }
@@ -500,10 +500,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.BITCOINIUM, ep.getExchange(Exchanges.BITCOINIUM).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Bitcoinium_cp = cp;
+                Set<CurrencyPair> Bitcoinium_cp = cp;
                 String bscp = Config.getInstance().get(Constants.bitcoinium_currency_pairs);
                 if(bscp != null) {
-                        Bitcoinium_cp = new ArrayList<>();
+                        Bitcoinium_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Bitcoinium_cp.add(new CurrencyPair(pair));
                         }
@@ -537,10 +537,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.BITCOINTOYOU, ep.getExchange(Exchanges.BITCOINTOYOU).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Bitcointoyou_cp = cp;
+                Set<CurrencyPair> Bitcointoyou_cp = cp;
                 String bscp = Config.getInstance().get(Constants.bitcointoyou_currency_pairs);
                 if(bscp != null) {
-                        Bitcointoyou_cp = new ArrayList<>();
+                        Bitcointoyou_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Bitcointoyou_cp.add(new CurrencyPair(pair));
                         }
@@ -575,10 +575,10 @@ public class Main {
 				displayCurrencyPairs(Exchanges.BITFINEX, ep.getExchange(Exchanges.BITFINEX).getCurrencyPairs());
 			} else {
 
-                ArrayList<CurrencyPair> Bitfinex_cp = cp;
+                Set<CurrencyPair> Bitfinex_cp = cp;
                 String bscp = Config.getInstance().get(Constants.bitfinex_currency_pairs);
                 if(bscp != null) {
-                        Bitfinex_cp = new ArrayList<>();
+                        Bitfinex_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Bitfinex_cp.add(new CurrencyPair(pair));
                         }
@@ -613,10 +613,10 @@ public class Main {
 				displayCurrencyPairs(Exchanges.BITFLYER, ep.getExchange(Exchanges.BITFLYER).getCurrencyPairs());
 			} else {
 
-                ArrayList<CurrencyPair> Bitflyer_cp = cp;
+                Set<CurrencyPair> Bitflyer_cp = cp;
                 String bscp = Config.getInstance().get(Constants.bitflyer_currency_pairs);
                 if(bscp != null) {
-                        Bitflyer_cp = new ArrayList<>();
+                        Bitflyer_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Bitflyer_cp.add(new CurrencyPair(pair));
                         }
@@ -651,10 +651,10 @@ public class Main {
 				displayCurrencyPairs(Exchanges.BITHUMB, ep.getExchange(Exchanges.BITHUMB).getCurrencyPairs());
 			} else {
 
-                ArrayList<CurrencyPair> Bithumb_cp = cp;
+                Set<CurrencyPair> Bithumb_cp = cp;
                 String bscp = Config.getInstance().get(Constants.bithumb_currency_pairs);
                 if(bscp != null) {
-                        Bithumb_cp = new ArrayList<>();
+                        Bithumb_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Bithumb_cp.add(new CurrencyPair(pair));
                         }
@@ -689,10 +689,10 @@ public class Main {
 				displayCurrencyPairs(Exchanges.BITMEX, ep.getExchange(Exchanges.BITMEX).getCurrencyPairs());
 			} else {
 
-                ArrayList<CurrencyPair> Bitmex_cp = cp;
+                Set<CurrencyPair> Bitmex_cp = cp;
                 String bscp = Config.getInstance().get(Constants.bitmex_currency_pairs);
                 if(bscp != null) {
-                        Bitmex_cp = new ArrayList<>();
+                        Bitmex_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Bitmex_cp.add(new CurrencyPair(pair));
                         }
@@ -726,10 +726,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.BITSO, ep.getExchange(Exchanges.BITSO).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Bitso_cp = cp;
+                Set<CurrencyPair> Bitso_cp = cp;
                 String bscp = Config.getInstance().get(Constants.bitso_currency_pairs);
                 if(bscp != null) {
-                        Bitso_cp = new ArrayList<>();
+                        Bitso_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Bitso_cp.add(new CurrencyPair(pair));
                         }
@@ -764,10 +764,10 @@ public class Main {
 				displayCurrencyPairs(Exchanges.BITSTAMP, ep.getExchange(Exchanges.BITSTAMP).getCurrencyPairs());
 			} else {
 
-                ArrayList<CurrencyPair> Bitstamp_cp = cp;
+                Set<CurrencyPair> Bitstamp_cp = cp;
                 String bscp = Config.getInstance().get(Constants.bitstamp_currency_pairs);
                 if(bscp != null) {
-                        Bitstamp_cp = new ArrayList<>();
+                        Bitstamp_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Bitstamp_cp.add(new CurrencyPair(pair));
                         }
@@ -801,10 +801,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.BITTREX, ep.getExchange(Exchanges.BITTREX).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Bittrex_cp = cp;
+                Set<CurrencyPair> Bittrex_cp = cp;
                 String bscp = Config.getInstance().get(Constants.bittrex_currency_pairs);
                 if(bscp != null) {
-                        Bittrex_cp = new ArrayList<>();
+                        Bittrex_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Bittrex_cp.add(new CurrencyPair(pair));
                         }
@@ -838,10 +838,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.BITY, ep.getExchange(Exchanges.BITY).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Bity_cp = cp;
+                Set<CurrencyPair> Bity_cp = cp;
                 String bscp = Config.getInstance().get(Constants.bity_currency_pairs);
                 if(bscp != null) {
-                        Bity_cp = new ArrayList<>();
+                        Bity_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Bity_cp.add(new CurrencyPair(pair));
                         }
@@ -875,10 +875,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.BITZ, ep.getExchange(Exchanges.BITZ).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Bitz_cp = cp;
+                Set<CurrencyPair> Bitz_cp = cp;
                 String bscp = Config.getInstance().get(Constants.bitz_currency_pairs);
                 if(bscp != null) {
-                        Bitz_cp = new ArrayList<>();
+                        Bitz_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Bitz_cp.add(new CurrencyPair(pair));
                         }
@@ -912,10 +912,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.BL3P, ep.getExchange(Exchanges.BL3P).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Bl3p_cp = cp;
+                Set<CurrencyPair> Bl3p_cp = cp;
                 String bscp = Config.getInstance().get(Constants.bl3p_currency_pairs);
                 if(bscp != null) {
-                        Bl3p_cp = new ArrayList<>();
+                        Bl3p_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Bl3p_cp.add(new CurrencyPair(pair));
                         }
@@ -949,10 +949,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.BLEUTRADE, ep.getExchange(Exchanges.BLEUTRADE).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Bleutrade_cp = cp;
+                Set<CurrencyPair> Bleutrade_cp = cp;
                 String bscp = Config.getInstance().get(Constants.bleutrade_currency_pairs);
                 if(bscp != null) {
-                        Bleutrade_cp = new ArrayList<>();
+                        Bleutrade_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Bleutrade_cp.add(new CurrencyPair(pair));
                         }
@@ -986,10 +986,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.BLOCKCHAIN, ep.getExchange(Exchanges.BLOCKCHAIN).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Blockchain_cp = cp;
+                Set<CurrencyPair> Blockchain_cp = cp;
                 String bscp = Config.getInstance().get(Constants.blockchain_currency_pairs);
                 if(bscp != null) {
-                        Blockchain_cp = new ArrayList<>();
+                        Blockchain_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Blockchain_cp.add(new CurrencyPair(pair));
                         }
@@ -1023,10 +1023,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.BTCC, ep.getExchange(Exchanges.BTCC).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Btcc_cp = cp;
+                Set<CurrencyPair> Btcc_cp = cp;
                 String bscp = Config.getInstance().get(Constants.btcc_currency_pairs);
                 if(bscp != null) {
-                        Btcc_cp = new ArrayList<>();
+                        Btcc_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Btcc_cp.add(new CurrencyPair(pair));
                         }
@@ -1060,10 +1060,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.BTCMARKETS, ep.getExchange(Exchanges.BTCMARKETS).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Btcmarkets_cp = cp;
+                Set<CurrencyPair> Btcmarkets_cp = cp;
                 String bscp = Config.getInstance().get(Constants.btcmarkets_currency_pairs);
                 if(bscp != null) {
-                        Btcmarkets_cp = new ArrayList<>();
+                        Btcmarkets_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Btcmarkets_cp.add(new CurrencyPair(pair));
                         }
@@ -1097,10 +1097,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.BTCTRADE, ep.getExchange(Exchanges.BTCTRADE).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Btctrade_cp = cp;
+                Set<CurrencyPair> Btctrade_cp = cp;
                 String bscp = Config.getInstance().get(Constants.btctrade_currency_pairs);
                 if(bscp != null) {
-                        Btctrade_cp = new ArrayList<>();
+                        Btctrade_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Btctrade_cp.add(new CurrencyPair(pair));
                         }
@@ -1134,10 +1134,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.BTCTURK, ep.getExchange(Exchanges.BTCTURK).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Btcturk_cp = cp;
+                Set<CurrencyPair> Btcturk_cp = cp;
                 String bscp = Config.getInstance().get(Constants.btcturk_currency_pairs);
                 if(bscp != null) {
-                        Btcturk_cp = new ArrayList<>();
+                        Btcturk_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Btcturk_cp.add(new CurrencyPair(pair));
                         }
@@ -1171,10 +1171,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.BX, ep.getExchange(Exchanges.BX).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Bx_cp = cp;
+                Set<CurrencyPair> Bx_cp = cp;
                 String bscp = Config.getInstance().get(Constants.bx_currency_pairs);
                 if(bscp != null) {
-                        Bx_cp = new ArrayList<>();
+                        Bx_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Bx_cp.add(new CurrencyPair(pair));
                         }
@@ -1208,10 +1208,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.CAMPBX, ep.getExchange(Exchanges.CAMPBX).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Campbx_cp = cp;
+                Set<CurrencyPair> Campbx_cp = cp;
                 String bscp = Config.getInstance().get(Constants.campbx_currency_pairs);
                 if(bscp != null) {
-                        Campbx_cp = new ArrayList<>();
+                        Campbx_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Campbx_cp.add(new CurrencyPair(pair));
                         }
@@ -1245,10 +1245,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.CCEX, ep.getExchange(Exchanges.CCEX).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Ccex_cp = cp;
+                Set<CurrencyPair> Ccex_cp = cp;
                 String bscp = Config.getInstance().get(Constants.ccex_currency_pairs);
                 if(bscp != null) {
-                        Ccex_cp = new ArrayList<>();
+                        Ccex_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Ccex_cp.add(new CurrencyPair(pair));
                         }
@@ -1283,10 +1283,10 @@ public class Main {
 				displayCurrencyPairs(Exchanges.CEXIO, ep.getExchange(Exchanges.CEXIO).getCurrencyPairs());
 			} else {
 
-                ArrayList<CurrencyPair> Cexio_cp = cp;
+                Set<CurrencyPair> Cexio_cp = cp;
                 String bscp = Config.getInstance().get(Constants.cexio_currency_pairs);
                 if(bscp != null) {
-                        Cexio_cp = new ArrayList<>();
+                        Cexio_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Cexio_cp.add(new CurrencyPair(pair));
                         }
@@ -1320,10 +1320,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.COBINHOOD, ep.getExchange(Exchanges.COBINHOOD).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Cobinhood_cp = cp;
+                Set<CurrencyPair> Cobinhood_cp = cp;
                 String bscp = Config.getInstance().get(Constants.cobinhood_currency_pairs);
                 if(bscp != null) {
-                        Cobinhood_cp = new ArrayList<>();
+                        Cobinhood_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Cobinhood_cp.add(new CurrencyPair(pair));
                         }
@@ -1357,10 +1357,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.COINBASE, ep.getExchange(Exchanges.COINBASE).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Coinbase_cp = cp;
+                Set<CurrencyPair> Coinbase_cp = cp;
                 String bscp = Config.getInstance().get(Constants.coinbase_currency_pairs);
                 if(bscp != null) {
-                        Coinbase_cp = new ArrayList<>();
+                        Coinbase_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Coinbase_cp.add(new CurrencyPair(pair));
                         }
@@ -1395,10 +1395,10 @@ public class Main {
 				displayCurrencyPairs(Exchanges.COINBASEPRO, ep.getExchange(Exchanges.COINBASEPRO).getCurrencyPairs());
 			} else {
 
-                ArrayList<CurrencyPair> Coinbasepro_cp = cp;
+                Set<CurrencyPair> Coinbasepro_cp = cp;
                 String bscp = Config.getInstance().get(Constants.coinbasepro_currency_pairs);
                 if(bscp != null) {
-                        Coinbasepro_cp = new ArrayList<>();
+                        Coinbasepro_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Coinbasepro_cp.add(new CurrencyPair(pair));
                         }
@@ -1432,10 +1432,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.COINBENE, ep.getExchange(Exchanges.COINBENE).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Coinbene_cp = cp;
+                Set<CurrencyPair> Coinbene_cp = cp;
                 String bscp = Config.getInstance().get(Constants.coinbene_currency_pairs);
                 if(bscp != null) {
-                        Coinbene_cp = new ArrayList<>();
+                        Coinbene_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Coinbene_cp.add(new CurrencyPair(pair));
                         }
@@ -1469,10 +1469,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.COINDEAL, ep.getExchange(Exchanges.COINDEAL).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Coindeal_cp = cp;
+                Set<CurrencyPair> Coindeal_cp = cp;
                 String bscp = Config.getInstance().get(Constants.coindeal_currency_pairs);
                 if(bscp != null) {
-                        Coindeal_cp = new ArrayList<>();
+                        Coindeal_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Coindeal_cp.add(new CurrencyPair(pair));
                         }
@@ -1506,10 +1506,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.COINDIRECT, ep.getExchange(Exchanges.COINDIRECT).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Coindirect_cp = cp;
+                Set<CurrencyPair> Coindirect_cp = cp;
                 String bscp = Config.getInstance().get(Constants.coindirect_currency_pairs);
                 if(bscp != null) {
-                        Coindirect_cp = new ArrayList<>();
+                        Coindirect_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Coindirect_cp.add(new CurrencyPair(pair));
                         }
@@ -1543,10 +1543,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.COINEGG, ep.getExchange(Exchanges.COINEGG).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Coinegg_cp = cp;
+                Set<CurrencyPair> Coinegg_cp = cp;
                 String bscp = Config.getInstance().get(Constants.coinegg_currency_pairs);
                 if(bscp != null) {
-                        Coinegg_cp = new ArrayList<>();
+                        Coinegg_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Coinegg_cp.add(new CurrencyPair(pair));
                         }
@@ -1580,10 +1580,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.COINEX, ep.getExchange(Exchanges.COINEX).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Coinex_cp = cp;
+                Set<CurrencyPair> Coinex_cp = cp;
                 String bscp = Config.getInstance().get(Constants.coinex_currency_pairs);
                 if(bscp != null) {
-                        Coinex_cp = new ArrayList<>();
+                        Coinex_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Coinex_cp.add(new CurrencyPair(pair));
                         }
@@ -1617,10 +1617,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.COINFLOOR, ep.getExchange(Exchanges.COINFLOOR).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Coinfloor_cp = cp;
+                Set<CurrencyPair> Coinfloor_cp = cp;
                 String bscp = Config.getInstance().get(Constants.coinfloor_currency_pairs);
                 if(bscp != null) {
-                        Coinfloor_cp = new ArrayList<>();
+                        Coinfloor_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Coinfloor_cp.add(new CurrencyPair(pair));
                         }
@@ -1654,10 +1654,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.COINGI, ep.getExchange(Exchanges.COINGI).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Coingi_cp = cp;
+                Set<CurrencyPair> Coingi_cp = cp;
                 String bscp = Config.getInstance().get(Constants.coingi_currency_pairs);
                 if(bscp != null) {
-                        Coingi_cp = new ArrayList<>();
+                        Coingi_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Coingi_cp.add(new CurrencyPair(pair));
                         }
@@ -1691,10 +1691,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.COINMARKETCAP, ep.getExchange(Exchanges.COINMARKETCAP).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Coinmarketcap_cp = cp;
+				Set<CurrencyPair> Coinmarketcap_cp = cp;
                 String bscp = Config.getInstance().get(Constants.coinmarketcap_currency_pairs);
                 if(bscp != null) {
-                        Coinmarketcap_cp = new ArrayList<>();
+                        Coinmarketcap_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Coinmarketcap_cp.add(new CurrencyPair(pair));
                         }
@@ -1729,10 +1729,10 @@ public class Main {
 				displayCurrencyPairs(Exchanges.COINMATE, ep.getExchange(Exchanges.COINMATE).getCurrencyPairs());
 			} else {
 
-                ArrayList<CurrencyPair> Coinmate_cp = cp;
+                Set<CurrencyPair> Coinmate_cp = cp;
                 String bscp = Config.getInstance().get(Constants.coinmate_currency_pairs);
                 if(bscp != null) {
-                        Coinmate_cp = new ArrayList<>();
+                        Coinmate_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Coinmate_cp.add(new CurrencyPair(pair));
                         }
@@ -1766,10 +1766,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.COINONE, ep.getExchange(Exchanges.COINONE).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Coinone_cp = cp;
+                Set<CurrencyPair> Coinone_cp = cp;
                 String bscp = Config.getInstance().get(Constants.coinone_currency_pairs);
                 if(bscp != null) {
-                        Coinone_cp = new ArrayList<>();
+                        Coinone_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Coinone_cp.add(new CurrencyPair(pair));
                         }
@@ -1803,10 +1803,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.COINSUPER, ep.getExchange(Exchanges.COINSUPER).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Coinsuper_cp = cp;
+                Set<CurrencyPair> Coinsuper_cp = cp;
                 String bscp = Config.getInstance().get(Constants.coinsuper_currency_pairs);
                 if(bscp != null) {
-                        Coinsuper_cp = new ArrayList<>();
+                        Coinsuper_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Coinsuper_cp.add(new CurrencyPair(pair));
                         }
@@ -1840,10 +1840,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.CRYPTOFACILITIES, ep.getExchange(Exchanges.CRYPTOFACILITIES).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Cryptofacilities_cp = cp;
+                Set<CurrencyPair> Cryptofacilities_cp = cp;
                 String bscp = Config.getInstance().get(Constants.cryptofacilities_currency_pairs);
                 if(bscp != null) {
-                        Cryptofacilities_cp = new ArrayList<>();
+                        Cryptofacilities_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Cryptofacilities_cp.add(new CurrencyPair(pair));
                         }
@@ -1877,10 +1877,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.CRYPTONIT, ep.getExchange(Exchanges.CRYPTONIT).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Cryptonit_cp = cp;
+                Set<CurrencyPair> Cryptonit_cp = cp;
                 String bscp = Config.getInstance().get(Constants.cryptonit_currency_pairs);
                 if(bscp != null) {
-                        Cryptonit_cp = new ArrayList<>();
+                        Cryptonit_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Cryptonit_cp.add(new CurrencyPair(pair));
                         }
@@ -1914,10 +1914,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.CRYPTOPIA, ep.getExchange(Exchanges.CRYPTOPIA).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Cryptopia_cp = cp;
+                Set<CurrencyPair> Cryptopia_cp = cp;
                 String bscp = Config.getInstance().get(Constants.cryptopia_currency_pairs);
                 if(bscp != null) {
-                        Cryptopia_cp = new ArrayList<>();
+                        Cryptopia_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Cryptopia_cp.add(new CurrencyPair(pair));
                         }
@@ -1951,10 +1951,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.CRYPTOWATCH, ep.getExchange(Exchanges.CRYPTOWATCH).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Cryptowatch_cp = cp;
+                Set<CurrencyPair> Cryptowatch_cp = cp;
                 String bscp = Config.getInstance().get(Constants.cryptowatch_currency_pairs);
                 if(bscp != null) {
-                        Cryptowatch_cp = new ArrayList<>();
+                        Cryptowatch_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Cryptowatch_cp.add(new CurrencyPair(pair));
                         }
@@ -1988,10 +1988,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.DERIBIT, ep.getExchange(Exchanges.DERIBIT).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Deribit_cp = cp;
+                Set<CurrencyPair> Deribit_cp = cp;
                 String bscp = Config.getInstance().get(Constants.deribit_currency_pairs);
                 if(bscp != null) {
-                        Deribit_cp = new ArrayList<>();
+                        Deribit_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Deribit_cp.add(new CurrencyPair(pair));
                         }
@@ -2025,10 +2025,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.DRAGONEX, ep.getExchange(Exchanges.DRAGONEX).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Dragonex_cp = cp;
+                Set<CurrencyPair> Dragonex_cp = cp;
                 String bscp = Config.getInstance().get(Constants.dragonex_currency_pairs);
                 if(bscp != null) {
-                        Dragonex_cp = new ArrayList<>();
+                        Dragonex_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Dragonex_cp.add(new CurrencyPair(pair));
                         }
@@ -2062,10 +2062,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.DSX, ep.getExchange(Exchanges.DSX).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Dsx_cp = cp;
+                Set<CurrencyPair> Dsx_cp = cp;
                 String bscp = Config.getInstance().get(Constants.dsx_currency_pairs);
                 if(bscp != null) {
-                        Dsx_cp = new ArrayList<>();
+                        Dsx_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Dsx_cp.add(new CurrencyPair(pair));
                         }
@@ -2099,10 +2099,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.DVCHAIN, ep.getExchange(Exchanges.DVCHAIN).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Dvchain_cp = cp;
+                Set<CurrencyPair> Dvchain_cp = cp;
                 String bscp = Config.getInstance().get(Constants.dvchain_currency_pairs);
                 if(bscp != null) {
-                        Dvchain_cp = new ArrayList<>();
+                        Dvchain_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Dvchain_cp.add(new CurrencyPair(pair));
                         }
@@ -2136,10 +2136,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.ENIGMA, ep.getExchange(Exchanges.ENIGMA).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Enigma_cp = cp;
+                Set<CurrencyPair> Enigma_cp = cp;
                 String bscp = Config.getInstance().get(Constants.enigma_currency_pairs);
                 if(bscp != null) {
-                        Enigma_cp = new ArrayList<>();
+                        Enigma_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Enigma_cp.add(new CurrencyPair(pair));
                         }
@@ -2173,10 +2173,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.EXMO, ep.getExchange(Exchanges.EXMO).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Exmo_cp = cp;
+                Set<CurrencyPair> Exmo_cp = cp;
                 String bscp = Config.getInstance().get(Constants.exmo_currency_pairs);
                 if(bscp != null) {
-                        Exmo_cp = new ArrayList<>();
+                        Exmo_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Exmo_cp.add(new CurrencyPair(pair));
                         }
@@ -2210,10 +2210,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.EXX, ep.getExchange(Exchanges.EXX).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Exx_cp = cp;
+                Set<CurrencyPair> Exx_cp = cp;
                 String bscp = Config.getInstance().get(Constants.exx_currency_pairs);
                 if(bscp != null) {
-                        Exx_cp = new ArrayList<>();
+                        Exx_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Exx_cp.add(new CurrencyPair(pair));
                         }
@@ -2247,10 +2247,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.FCOIN, ep.getExchange(Exchanges.FCOIN).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Fcoin_cp = cp;
+                Set<CurrencyPair> Fcoin_cp = cp;
                 String bscp = Config.getInstance().get(Constants.fcoin_currency_pairs);
                 if(bscp != null) {
-                        Fcoin_cp = new ArrayList<>();
+                        Fcoin_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Fcoin_cp.add(new CurrencyPair(pair));
                         }
@@ -2284,10 +2284,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.GATEIO, ep.getExchange(Exchanges.GATEIO).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Gateio_cp = cp;
+                Set<CurrencyPair> Gateio_cp = cp;
                 String bscp = Config.getInstance().get(Constants.gateio_currency_pairs);
                 if(bscp != null) {
-                        Gateio_cp = new ArrayList<>();
+                        Gateio_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Gateio_cp.add(new CurrencyPair(pair));
                         }
@@ -2322,10 +2322,10 @@ public class Main {
 				displayCurrencyPairs(Exchanges.GEMINI, ep.getExchange(Exchanges.GEMINI).getCurrencyPairs());
 			} else {
 
-                ArrayList<CurrencyPair> Gemini_cp = cp;
+                Set<CurrencyPair> Gemini_cp = cp;
                 String bscp = Config.getInstance().get(Constants.gemini_currency_pairs);
                 if(bscp != null) {
-                        Gemini_cp = new ArrayList<>();
+                        Gemini_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Gemini_cp.add(new CurrencyPair(pair));
                         }
@@ -2359,10 +2359,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.GLOBITEX, ep.getExchange(Exchanges.GLOBITEX).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Globitex_cp = cp;
+                Set<CurrencyPair> Globitex_cp = cp;
                 String bscp = Config.getInstance().get(Constants.globitex_currency_pairs);
                 if(bscp != null) {
-                        Globitex_cp = new ArrayList<>();
+                        Globitex_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Globitex_cp.add(new CurrencyPair(pair));
                         }
@@ -2397,10 +2397,10 @@ public class Main {
 				displayCurrencyPairs(Exchanges.HITBTC, ep.getExchange(Exchanges.HITBTC).getCurrencyPairs());
 			} else {
 
-                ArrayList<CurrencyPair> Hitbtc_cp = cp;
+                Set<CurrencyPair> Hitbtc_cp = cp;
                 String bscp = Config.getInstance().get(Constants.hitbtc_currency_pairs);
                 if(bscp != null) {
-                        Hitbtc_cp = new ArrayList<>();
+                        Hitbtc_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Hitbtc_cp.add(new CurrencyPair(pair));
                         }
@@ -2434,10 +2434,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.HUOBI, ep.getExchange(Exchanges.HUOBI).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Huobi_cp = cp;
+                Set<CurrencyPair> Huobi_cp = cp;
                 String bscp = Config.getInstance().get(Constants.huobi_currency_pairs);
                 if(bscp != null) {
-                        Huobi_cp = new ArrayList<>();
+                        Huobi_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Huobi_cp.add(new CurrencyPair(pair));
                         }
@@ -2471,10 +2471,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.IDEX, ep.getExchange(Exchanges.IDEX).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Idex_cp = cp;
+                Set<CurrencyPair> Idex_cp = cp;
                 String bscp = Config.getInstance().get(Constants.idex_currency_pairs);
                 if(bscp != null) {
-                        Idex_cp = new ArrayList<>();
+                        Idex_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Idex_cp.add(new CurrencyPair(pair));
                         }
@@ -2508,10 +2508,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.ITBIT, ep.getExchange(Exchanges.ITBIT).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Itbit_cp = cp;
+                Set<CurrencyPair> Itbit_cp = cp;
                 String bscp = Config.getInstance().get(Constants.itbit_currency_pairs);
                 if(bscp != null) {
-                        Itbit_cp = new ArrayList<>();
+                        Itbit_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Itbit_cp.add(new CurrencyPair(pair));
                         }
@@ -2545,10 +2545,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.KOINEKS, ep.getExchange(Exchanges.KOINEKS).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Koineks_cp = cp;
+                Set<CurrencyPair> Koineks_cp = cp;
                 String bscp = Config.getInstance().get(Constants.koineks_currency_pairs);
                 if(bscp != null) {
-                        Koineks_cp = new ArrayList<>();
+                        Koineks_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Koineks_cp.add(new CurrencyPair(pair));
                         }
@@ -2582,10 +2582,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.KOINIM, ep.getExchange(Exchanges.KOINIM).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Koinim_cp = cp;
+                Set<CurrencyPair> Koinim_cp = cp;
                 String bscp = Config.getInstance().get(Constants.koinim_currency_pairs);
                 if(bscp != null) {
-                        Koinim_cp = new ArrayList<>();
+                        Koinim_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Koinim_cp.add(new CurrencyPair(pair));
                         }
@@ -2620,10 +2620,10 @@ public class Main {
 				displayCurrencyPairs(Exchanges.KRAKEN, ep.getExchange(Exchanges.KRAKEN).getCurrencyPairs());
 			} else {
 
-                ArrayList<CurrencyPair> Kraken_cp = cp;
+                Set<CurrencyPair> Kraken_cp = cp;
                 String bscp = Config.getInstance().get(Constants.kraken_currency_pairs);
                 if(bscp != null) {
-                        Kraken_cp = new ArrayList<>();
+                        Kraken_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Kraken_cp.add(new CurrencyPair(pair));
                         }
@@ -2657,10 +2657,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.KUCOIN, ep.getExchange(Exchanges.KUCOIN).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Kucoin_cp = cp;
+                Set<CurrencyPair> Kucoin_cp = cp;
                 String bscp = Config.getInstance().get(Constants.kucoin_currency_pairs);
                 if(bscp != null) {
-                        Kucoin_cp = new ArrayList<>();
+                        Kucoin_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Kucoin_cp.add(new CurrencyPair(pair));
                         }
@@ -2694,10 +2694,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.KUNA, ep.getExchange(Exchanges.KUNA).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Kuna_cp = cp;
+                Set<CurrencyPair> Kuna_cp = cp;
                 String bscp = Config.getInstance().get(Constants.kuna_currency_pairs);
                 if(bscp != null) {
-                        Kuna_cp = new ArrayList<>();
+                        Kuna_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Kuna_cp.add(new CurrencyPair(pair));
                         }
@@ -2731,10 +2731,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.LAKEBTC, ep.getExchange(Exchanges.LAKEBTC).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Lakebtc_cp = cp;
+                Set<CurrencyPair> Lakebtc_cp = cp;
                 String bscp = Config.getInstance().get(Constants.lakebtc_currency_pairs);
                 if(bscp != null) {
-                        Lakebtc_cp = new ArrayList<>();
+                        Lakebtc_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Lakebtc_cp.add(new CurrencyPair(pair));
                         }
@@ -2768,10 +2768,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.LATOKEN, ep.getExchange(Exchanges.LATOKEN).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Latoken_cp = cp;
+                Set<CurrencyPair> Latoken_cp = cp;
                 String bscp = Config.getInstance().get(Constants.latoken_currency_pairs);
                 if(bscp != null) {
-                        Latoken_cp = new ArrayList<>();
+                        Latoken_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Latoken_cp.add(new CurrencyPair(pair));
                         }
@@ -2806,10 +2806,10 @@ public class Main {
 				displayCurrencyPairs(Exchanges.LGO, ep.getExchange(Exchanges.LGO).getCurrencyPairs());
 			} else {
 
-                ArrayList<CurrencyPair> Lgo_cp = cp;
+                Set<CurrencyPair> Lgo_cp = cp;
                 String bscp = Config.getInstance().get(Constants.lgo_currency_pairs);
                 if(bscp != null) {
-                        Lgo_cp = new ArrayList<>();
+                        Lgo_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Lgo_cp.add(new CurrencyPair(pair));
                         }
@@ -2843,10 +2843,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.LIQUI, ep.getExchange(Exchanges.LIQUI).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Liqui_cp = cp;
+                Set<CurrencyPair> Liqui_cp = cp;
                 String bscp = Config.getInstance().get(Constants.liqui_currency_pairs);
                 if(bscp != null) {
-                        Liqui_cp = new ArrayList<>();
+                        Liqui_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Liqui_cp.add(new CurrencyPair(pair));
                         }
@@ -2880,10 +2880,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.LIVECOIN, ep.getExchange(Exchanges.LIVECOIN).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Livecoin_cp = cp;
+                Set<CurrencyPair> Livecoin_cp = cp;
                 String bscp = Config.getInstance().get(Constants.livecoin_currency_pairs);
                 if(bscp != null) {
-                        Livecoin_cp = new ArrayList<>();
+                        Livecoin_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Livecoin_cp.add(new CurrencyPair(pair));
                         }
@@ -2917,10 +2917,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.LUNO, ep.getExchange(Exchanges.LUNO).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Luno_cp = cp;
+                Set<CurrencyPair> Luno_cp = cp;
                 String bscp = Config.getInstance().get(Constants.luno_currency_pairs);
                 if(bscp != null) {
-                        Luno_cp = new ArrayList<>();
+                        Luno_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Luno_cp.add(new CurrencyPair(pair));
                         }
@@ -2954,10 +2954,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.LYKKE, ep.getExchange(Exchanges.LYKKE).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Lykke_cp = cp;
+                Set<CurrencyPair> Lykke_cp = cp;
                 String bscp = Config.getInstance().get(Constants.lykke_currency_pairs);
                 if(bscp != null) {
-                        Lykke_cp = new ArrayList<>();
+                        Lykke_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Lykke_cp.add(new CurrencyPair(pair));
                         }
@@ -2991,10 +2991,10 @@ public class Main {
 		    if (listCmd) {
 				displayCurrencyPairs(Exchanges.MERCADOBITCOIN, ep.getExchange(Exchanges.MERCADOBITCOIN).getCurrencyPairs());
 			} else {
-                ArrayList<CurrencyPair> Mercadobitcoin_cp = cp;
+                Set<CurrencyPair> Mercadobitcoin_cp = cp;
                 String bscp = Config.getInstance().get(Constants.mercadobitcoin_currency_pairs);
                 if(bscp != null) {
-                        Mercadobitcoin_cp = new ArrayList<>();
+                        Mercadobitcoin_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Mercadobitcoin_cp.add(new CurrencyPair(pair));
                         }
@@ -3029,10 +3029,10 @@ public class Main {
 				displayCurrencyPairs(Exchanges.OKCOIN, ep.getExchange(Exchanges.OKCOIN).getCurrencyPairs());
 			} else {
 
-                ArrayList<CurrencyPair> Okcoin_cp = cp;
+                Set<CurrencyPair> Okcoin_cp = cp;
                 String bscp = Config.getInstance().get(Constants.okcoin_currency_pairs);
                 if(bscp != null) {
-                        Okcoin_cp = new ArrayList<>();
+                        Okcoin_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Okcoin_cp.add(new CurrencyPair(pair));
                         }
@@ -3067,10 +3067,10 @@ public class Main {
 				displayCurrencyPairs(Exchanges.PARIBU, ep.getExchange(Exchanges.PARIBU).getCurrencyPairs());
 			} else {
 
-                ArrayList<CurrencyPair> Paribu_cp = cp;
+                Set<CurrencyPair> Paribu_cp = cp;
                 String bscp = Config.getInstance().get(Constants.paribu_currency_pairs);
                 if(bscp != null) {
-                        Paribu_cp = new ArrayList<>();
+                        Paribu_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Paribu_cp.add(new CurrencyPair(pair));
                         }
@@ -3105,10 +3105,10 @@ public class Main {
 				displayCurrencyPairs(Exchanges.PAYMIUM, ep.getExchange(Exchanges.PAYMIUM).getCurrencyPairs());
 			} else {
 
-                ArrayList<CurrencyPair> Paymium_cp = cp;
+                Set<CurrencyPair> Paymium_cp = cp;
                 String bscp = Config.getInstance().get(Constants.paymium_currency_pairs);
                 if(bscp != null) {
-                        Paymium_cp = new ArrayList<>();
+                        Paymium_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Paymium_cp.add(new CurrencyPair(pair));
                         }
@@ -3143,10 +3143,10 @@ public class Main {
 				displayCurrencyPairs(Exchanges.POLONIEX, ep.getExchange(Exchanges.POLONIEX).getCurrencyPairs());
 			} else {
 
-                ArrayList<CurrencyPair> Poloniex_cp = cp;
+                Set<CurrencyPair> Poloniex_cp = cp;
                 String bscp = Config.getInstance().get(Constants.poloniex_currency_pairs);
                 if(bscp != null) {
-                        Poloniex_cp = new ArrayList<>();
+                        Poloniex_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Poloniex_cp.add(new CurrencyPair(pair));
                         }
@@ -3181,10 +3181,10 @@ public class Main {
 				displayCurrencyPairs(Exchanges.QUOINE, ep.getExchange(Exchanges.QUOINE).getCurrencyPairs());
 			} else {
 
-                ArrayList<CurrencyPair> Quoine_cp = cp;
+                Set<CurrencyPair> Quoine_cp = cp;
                 String bscp = Config.getInstance().get(Constants.quoine_currency_pairs);
                 if(bscp != null) {
-                        Quoine_cp = new ArrayList<>();
+                        Quoine_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Quoine_cp.add(new CurrencyPair(pair));
                         }
@@ -3219,10 +3219,10 @@ public class Main {
 				displayCurrencyPairs(Exchanges.RIPPLE, ep.getExchange(Exchanges.RIPPLE).getCurrencyPairs());
 			} else {
 
-                ArrayList<CurrencyPair> Ripple_cp = cp;
+                Set<CurrencyPair> Ripple_cp = cp;
                 String bscp = Config.getInstance().get(Constants.ripple_currency_pairs);
                 if(bscp != null) {
-                        Ripple_cp = new ArrayList<>();
+                        Ripple_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Ripple_cp.add(new CurrencyPair(pair));
                         }
@@ -3257,10 +3257,10 @@ public class Main {
 				displayCurrencyPairs(Exchanges.THEROCK, ep.getExchange(Exchanges.THEROCK).getCurrencyPairs());
 			} else {
 
-                ArrayList<CurrencyPair> Therock_cp = cp;
+                Set<CurrencyPair> Therock_cp = cp;
                 String bscp = Config.getInstance().get(Constants.therock_currency_pairs);
                 if(bscp != null) {
-                        Therock_cp = new ArrayList<>();
+                        Therock_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Therock_cp.add(new CurrencyPair(pair));
                         }
@@ -3295,10 +3295,10 @@ public class Main {
 				displayCurrencyPairs(Exchanges.TRADEOGRE, ep.getExchange(Exchanges.TRADEOGRE).getCurrencyPairs());
 			} else {
 
-                ArrayList<CurrencyPair> Tradeogre_cp = cp;
+                Set<CurrencyPair> Tradeogre_cp = cp;
                 String bscp = Config.getInstance().get(Constants.tradeogre_currency_pairs);
                 if(bscp != null) {
-                        Tradeogre_cp = new ArrayList<>();
+                        Tradeogre_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Tradeogre_cp.add(new CurrencyPair(pair));
                         }
@@ -3333,10 +3333,10 @@ public class Main {
 				displayCurrencyPairs(Exchanges.TRUEFX, ep.getExchange(Exchanges.TRUEFX).getCurrencyPairs());
 			} else {
 
-                ArrayList<CurrencyPair> Truefx_cp = cp;
+                Set<CurrencyPair> Truefx_cp = cp;
                 String bscp = Config.getInstance().get(Constants.truefx_currency_pairs);
                 if(bscp != null) {
-                        Truefx_cp = new ArrayList<>();
+                        Truefx_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Truefx_cp.add(new CurrencyPair(pair));
                         }
@@ -3371,10 +3371,10 @@ public class Main {
 				displayCurrencyPairs(Exchanges.UPBIT, ep.getExchange(Exchanges.UPBIT).getCurrencyPairs());
 			} else {
 
-                ArrayList<CurrencyPair> Upbit_cp = cp;
+                Set<CurrencyPair> Upbit_cp = cp;
                 String bscp = Config.getInstance().get(Constants.upbit_currency_pairs);
                 if(bscp != null) {
-                        Upbit_cp = new ArrayList<>();
+                        Upbit_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Upbit_cp.add(new CurrencyPair(pair));
                         }
@@ -3409,10 +3409,10 @@ public class Main {
 				displayCurrencyPairs(Exchanges.VAULTORO, ep.getExchange(Exchanges.VAULTORO).getCurrencyPairs());
 			} else {
 
-                ArrayList<CurrencyPair> Vaultoro_cp = cp;
+                Set<CurrencyPair> Vaultoro_cp = cp;
                 String bscp = Config.getInstance().get(Constants.vaultoro_currency_pairs);
                 if(bscp != null) {
-                        Vaultoro_cp = new ArrayList<>();
+                        Vaultoro_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Vaultoro_cp.add(new CurrencyPair(pair));
                         }
@@ -3447,10 +3447,10 @@ public class Main {
 				displayCurrencyPairs(Exchanges.YOBIT, ep.getExchange(Exchanges.YOBIT).getCurrencyPairs());
 			} else {
 
-                ArrayList<CurrencyPair> Yobit_cp = cp;
+                Set<CurrencyPair> Yobit_cp = cp;
                 String bscp = Config.getInstance().get(Constants.yobit_currency_pairs);
                 if(bscp != null) {
-                        Yobit_cp = new ArrayList<>();
+                        Yobit_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Yobit_cp.add(new CurrencyPair(pair));
                         }
@@ -3485,10 +3485,10 @@ public class Main {
 				displayCurrencyPairs(Exchanges.ZAIF, ep.getExchange(Exchanges.ZAIF).getCurrencyPairs());
 			} else {
 
-                ArrayList<CurrencyPair> Zaif_cp = cp;
+                Set<CurrencyPair> Zaif_cp = cp;
                 String bscp = Config.getInstance().get(Constants.zaif_currency_pairs);
                 if(bscp != null) {
-                        Zaif_cp = new ArrayList<>();
+                        Zaif_cp = new HashSet<>();
                         for(String pair : bscp.split(",")) {
                             Zaif_cp.add(new CurrencyPair(pair));
                         }

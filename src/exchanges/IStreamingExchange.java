@@ -1,7 +1,7 @@
 package exchanges;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Set;
 
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.OrderBook;
@@ -28,6 +28,6 @@ public interface IStreamingExchange {
 
 	Trades getStreamingTrades(CurrencyPair curr) throws IOException;
 
-	ArrayList<CurrencyPair> getStreamingCurrencyPairs() throws IOException;
+	Set<CurrencyPair> getStreamingCurrencyPairs() throws IOException;
 
 }

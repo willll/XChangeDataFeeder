@@ -1,8 +1,8 @@
 package exchanges;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.CurrencyPair;
@@ -25,6 +25,6 @@ public interface IExchange {
 
 	public Trades getTrades(CurrencyPair curr) throws IOException;
 
-	public ArrayList<CurrencyPair> getCurrencyPairs() throws IOException;
+	public Set<CurrencyPair> getCurrencyPairs() throws IOException;
 
 }

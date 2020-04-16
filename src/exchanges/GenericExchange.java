@@ -1,8 +1,9 @@
 package exchanges;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.CurrencyPair;
@@ -96,12 +97,12 @@ public abstract class GenericExchange implements IExchange, ILogger {
 	 * @see exchanges.IExchange#getCurrencyPairs()
 	 */
 	@Override
-	public ArrayList<CurrencyPair> getCurrencyPairs() throws IOException {
+	public Set<CurrencyPair> getCurrencyPairs() throws IOException {
 		try {
-			return new ArrayList<CurrencyPair>(this.exchange.getExchangeSymbols());
+			return new HashSet<CurrencyPair>(this.exchange.getExchangeSymbols());
 		} catch (NullPointerException e) {
 			logger.error(this.exchange.toString() + " : getCurrencyPairs failed !");
-			return new ArrayList<CurrencyPair>();
+			return new HashSet<CurrencyPair>();
 		}
 	}
 

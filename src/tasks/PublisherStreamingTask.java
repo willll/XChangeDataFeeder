@@ -1,9 +1,10 @@
 package tasks;
 
-import java.util.ArrayList;
+import java.util.Set;
 
 import org.knowm.xchange.currency.CurrencyPair;
 import org.zeromq.ZContext;
+
 import info.bitrich.xchangestream.core.StreamingExchange;
 import utils.Constants;
 
@@ -20,7 +21,7 @@ public class PublisherStreamingTask<T> extends PublisherTask<T> {
 	 * @param currencyPairs
 	 * @param context
 	 */
-	public PublisherStreamingTask(final String id, final T exchange, ArrayList<CurrencyPair> currencyPairs,
+	public PublisherStreamingTask(final String id, final T exchange, Set<CurrencyPair> currencyPairs,
 			final ZContext context, final StreamingExchange streamingExchange) {
 		super(id, exchange, currencyPairs, context, Constants.EXCHANGE_UPDATE_DELAY);
 		this.streamingExchange = streamingExchange;

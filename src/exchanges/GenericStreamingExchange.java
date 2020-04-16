@@ -1,7 +1,8 @@
 package exchanges;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.OrderBook;
@@ -122,8 +123,8 @@ public abstract class GenericStreamingExchange extends GenericExchange implement
 	 * @see exchanges.IStreamingExchange#getStreamingCurrencyPairs()
 	 */
 	@Override
-	public ArrayList<CurrencyPair> getStreamingCurrencyPairs() throws IOException {
-		return new ArrayList<CurrencyPair>(this.streamingExchange.getExchangeSymbols());
+	public Set<CurrencyPair> getStreamingCurrencyPairs() throws IOException {
+		return new HashSet<CurrencyPair>(this.streamingExchange.getExchangeSymbols());
 	}
 
 }

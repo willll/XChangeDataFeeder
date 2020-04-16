@@ -2,6 +2,7 @@ package exchanges.factories;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Set;
 
 import org.knowm.xchange.currency.CurrencyPair;
 import org.zeromq.ZContext;
@@ -10,12 +11,12 @@ import exchanges.GenericStreamingExchange;
 import exchanges.factories.EntryPoint.Exchanges;
 import features.ILogger;
 import info.bitrich.xchangestream.core.ProductSubscription;
-import info.bitrich.xchangestream.core.StreamingExchange;
 import info.bitrich.xchangestream.core.ProductSubscription.ProductSubscriptionBuilder;
+import info.bitrich.xchangestream.core.StreamingExchange;
 import tasks.OrderBookPublisherStreamingTask;
 import tasks.OrderBookPublisherTask;
-import tasks.TickerPublisherTask;
 import tasks.TickerPublisherStreamingTask;
+import tasks.TickerPublisherTask;
 
 /**
  * @author will
@@ -35,7 +36,7 @@ public class GenericStreamingFactory implements IFactory, ILogger {
 		 * @param context
 		 * @param pub
 		 */
-		public ticker_publisher_task(T exchange, ArrayList<CurrencyPair> currencyPair, ZContext context,
+		public ticker_publisher_task(T exchange, Set<CurrencyPair> currencyPair, ZContext context,
 				final String pub, final long refresh_rate) {
 			super(pub, exchange, currencyPair, context, refresh_rate);
 		}
@@ -48,14 +49,14 @@ public class GenericStreamingFactory implements IFactory, ILogger {
 	 */
 	@SuppressWarnings("unused")
 	protected static class Orderbook_publisher_task<T> extends OrderBookPublisherTask<T> implements Runnable {
-		public Orderbook_publisher_task(T exchange, ArrayList<CurrencyPair> currencyPair, ZContext context,
+		public Orderbook_publisher_task(T exchange, Set<CurrencyPair> currencyPair, ZContext context,
 				final String pub, final long refresh_rate) {
 			super(pub, exchange, currencyPair, context, refresh_rate);
 		}
 	}
 
 	@SuppressWarnings("unused")
-	public void create_ticker_stream_feeders(EntryPoint ep, ZContext context, ArrayList<CurrencyPair> cp)
+	public void create_ticker_stream_feeders(EntryPoint ep, ZContext context, Set<CurrencyPair> cp)
 			throws IOException {
 		if (!(ep.getExchange(exchange) instanceof GenericStreamingExchange)) {
 			throw new IllegalArgumentException();
@@ -69,7 +70,7 @@ public class GenericStreamingFactory implements IFactory, ILogger {
 
 	@Override
 	@SuppressWarnings("unused")
-	public ArrayList<Thread> create_orderbook_feeders(EntryPoint ep, ZContext context, ArrayList<CurrencyPair> cp)
+	public ArrayList<Thread> create_orderbook_feeders(EntryPoint ep, ZContext context, Set<CurrencyPair> cp)
 			throws IOException {
 
 		StreamingExchange streamingExchange = ep.getStreamingExchange(exchange).getStreamingExchange();
@@ -93,7 +94,7 @@ public class GenericStreamingFactory implements IFactory, ILogger {
 	}
 
 	public OrderBookPublisherStreamingTask create_runnable_orderbook_feeders(EntryPoint ep, ZContext context,
-			ArrayList<CurrencyPair> cp, ProductSubscriptionBuilder subscriptionBuilder)
+			Set<CurrencyPair> cp, ProductSubscriptionBuilder subscriptionBuilder)
 			throws IOException {
 
 		cp.forEach(c -> {
@@ -114,7 +115,7 @@ public class GenericStreamingFactory implements IFactory, ILogger {
 	 */
 	@Override
 	@SuppressWarnings("unused")
-	public ArrayList<Thread> create_ticker_feeders(EntryPoint ep, ZContext context, ArrayList<CurrencyPair> cp)
+	public ArrayList<Thread> create_ticker_feeders(EntryPoint ep, ZContext context, Set<CurrencyPair> cp)
 			throws IOException {
 		try {
 			return create_ticker_feeders(ep, context, cp, this.exchange, this.ticker_pub);
@@ -135,7 +136,7 @@ public class GenericStreamingFactory implements IFactory, ILogger {
 	 */
 	@SuppressWarnings("unused")
 	protected static ArrayList<Thread> create_ticker_feeders(EntryPoint ep, ZContext context,
-			ArrayList<CurrencyPair> cp, Exchanges exchange, String ticker_pub)
+			Set<CurrencyPair> cp, Exchanges exchange, String ticker_pub)
 			throws IOException, NullPointerException {
 
 		StreamingExchange streamingExchange = ep.getStreamingExchange(exchange).getStreamingExchange();
@@ -170,7 +171,7 @@ public class GenericStreamingFactory implements IFactory, ILogger {
 	 */
 	@SuppressWarnings("unused")
 	public TickerPublisherStreamingTask create_runnable_ticker_feeders(EntryPoint ep, ZContext context,
-			ArrayList<CurrencyPair> cp, Exchanges exchange, ProductSubscriptionBuilder subscriptionBuilder)
+			Set<CurrencyPair> cp, Exchanges exchange, ProductSubscriptionBuilder subscriptionBuilder)
 			throws IOException, NullPointerException {
 
 		cp.forEach(c -> {
