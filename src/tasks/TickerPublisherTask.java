@@ -73,6 +73,12 @@ public class TickerPublisherTask<T> extends PublisherTask<T> implements Runnable
 							} catch (CurrencyPairNotValidException e) {
 								crashed_cp = cp;
 								throw e;
+							} catch (ExchangeException e) {
+								logger.error(
+										this.threadId + " : ExchangeException : " + this.exchangeName + " : " + cp.toString());
+								// TBD : Cmc raised this : You've exceeded your API Key's HTTP request rate limit. Rate limits reset every minute. - ErrorCode: 1008
+								// Just exit the loop !
+								break;
 							}
 						}
 
