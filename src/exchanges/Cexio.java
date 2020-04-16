@@ -1,6 +1,7 @@
 package exchanges;
 
 import org.knowm.xchange.ExchangeFactory;
+
 import info.bitrich.xchangestream.cexio.CexioStreamingExchange;
 import info.bitrich.xchangestream.core.StreamingExchangeFactory;
 

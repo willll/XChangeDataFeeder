@@ -1,8 +1,9 @@
 package exchanges;
 
 import org.knowm.xchange.ExchangeFactory;
-import info.bitrich.xchangestream.gemini.GeminiStreamingExchange;
+
 import info.bitrich.xchangestream.core.StreamingExchangeFactory;
+import info.bitrich.xchangestream.gemini.GeminiStreamingExchange;
 
 public class Gemini extends GenericStreamingExchange {
 	public Gemini() {
