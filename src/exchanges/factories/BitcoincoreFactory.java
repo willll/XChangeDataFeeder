@@ -49,17 +49,17 @@ public class BitcoincoreFactory extends GenericFactory {
 				// Set refresh time
 				String refresh_timer = Config.getInstance().get(Constants.bitcoincore_refresh_rate);
                 if (refresh_timer != null) {
-					ExchangesFactory.getAcxFactory().setRefreshRate(Long.parseLong(refresh_timer) * 1000);
+					ExchangesFactory.getBitcoincoreFactory().setRefreshRate(Long.parseLong(refresh_timer) * 1000);
 				}
 
 				// Create a ticker from Bitcoincore
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.bitcoincore_ticker_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_ticker_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getBitcoincoreFactory().create_ticker_feeders(_ep, _ctx, _cp));
 				}
 
 				// Create an orderbook from Bitcoincore
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.bitcoincore_orderbook_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_orderbook_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getBitcoincoreFactory().create_orderbook_feeders(_ep, _ctx, _cp));
 				}
 			}
 		}

@@ -49,17 +49,17 @@ public class LivecoinFactory extends GenericFactory {
 				// Set refresh time
 				String refresh_timer = Config.getInstance().get(Constants.livecoin_refresh_rate);
                 if (refresh_timer != null) {
-					ExchangesFactory.getAcxFactory().setRefreshRate(Long.parseLong(refresh_timer) * 1000);
+					ExchangesFactory.getLivecoinFactory().setRefreshRate(Long.parseLong(refresh_timer) * 1000);
 				}
 
 				// Create a ticker from Livecoin
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.livecoin_ticker_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_ticker_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getLivecoinFactory().create_ticker_feeders(_ep, _ctx, _cp));
 				}
 
 				// Create an orderbook from Livecoin
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.livecoin_orderbook_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_orderbook_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getLivecoinFactory().create_orderbook_feeders(_ep, _ctx, _cp));
 				}
 			}
 		}

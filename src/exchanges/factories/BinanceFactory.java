@@ -48,12 +48,12 @@ public class BinanceFactory extends GenericStreamingFactory {
 
 				// Create a ticker from Binance
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.binance_ticker_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_ticker_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getBinanceFactory().create_ticker_feeders(_ep, _ctx, _cp));
 				}
 
 				// Create an orderbook from Binance
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.binance_orderbook_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_orderbook_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getBinanceFactory().create_orderbook_feeders(_ep, _ctx, _cp));
 				}
 			}
 		}

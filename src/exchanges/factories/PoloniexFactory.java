@@ -48,12 +48,12 @@ public class PoloniexFactory extends GenericStreamingFactory {
 
 				// Create a ticker from Poloniex
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.poloniex_ticker_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_ticker_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getPoloniexFactory().create_ticker_feeders(_ep, _ctx, _cp));
 				}
 
 				// Create an orderbook from Poloniex
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.poloniex_orderbook_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_orderbook_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getPoloniexFactory().create_orderbook_feeders(_ep, _ctx, _cp));
 				}
 			}
 		}

@@ -49,17 +49,17 @@ public class CoinexFactory extends GenericFactory {
 				// Set refresh time
 				String refresh_timer = Config.getInstance().get(Constants.coinex_refresh_rate);
                 if (refresh_timer != null) {
-					ExchangesFactory.getAcxFactory().setRefreshRate(Long.parseLong(refresh_timer) * 1000);
+					ExchangesFactory.getCoinexFactory().setRefreshRate(Long.parseLong(refresh_timer) * 1000);
 				}
 
 				// Create a ticker from Coinex
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.coinex_ticker_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_ticker_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getCoinexFactory().create_ticker_feeders(_ep, _ctx, _cp));
 				}
 
 				// Create an orderbook from Coinex
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.coinex_orderbook_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_orderbook_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getCoinexFactory().create_orderbook_feeders(_ep, _ctx, _cp));
 				}
 			}
 		}

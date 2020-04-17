@@ -48,12 +48,12 @@ public class BitfinexFactory extends GenericStreamingFactory {
 
 				// Create a ticker from Bitfinex
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.bitfinex_ticker_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_ticker_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getBitfinexFactory().create_ticker_feeders(_ep, _ctx, _cp));
 				}
 
 				// Create an orderbook from Bitfinex
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.bitfinex_orderbook_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_orderbook_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getBitfinexFactory().create_orderbook_feeders(_ep, _ctx, _cp));
 				}
 			}
 		}

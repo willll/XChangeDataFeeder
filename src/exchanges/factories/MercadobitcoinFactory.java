@@ -49,17 +49,17 @@ public class MercadobitcoinFactory extends GenericFactory {
 				// Set refresh time
 				String refresh_timer = Config.getInstance().get(Constants.MercadoBitcoin_refresh_rate);
                 if (refresh_timer != null) {
-					ExchangesFactory.getAcxFactory().setRefreshRate(Long.parseLong(refresh_timer) * 1000);
+					ExchangesFactory.getMercadobitcoinFactory().setRefreshRate(Long.parseLong(refresh_timer) * 1000);
 				}
 
 				// Create a ticker from Mercadobitcoin
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.MercadoBitcoin_ticker_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_ticker_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getMercadobitcoinFactory().create_ticker_feeders(_ep, _ctx, _cp));
 				}
 
 				// Create an orderbook from Mercadobitcoin
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.MercadoBitcoin_orderbook_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_orderbook_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getMercadobitcoinFactory().create_orderbook_feeders(_ep, _ctx, _cp));
 				}
 			}
 		}

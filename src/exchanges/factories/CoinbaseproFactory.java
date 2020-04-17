@@ -48,12 +48,12 @@ public class CoinbaseproFactory extends GenericStreamingFactory {
 
 				// Create a ticker from Coinbasepro
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.coinbasepro_ticker_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_ticker_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getCoinbaseproFactory().create_ticker_feeders(_ep, _ctx, _cp));
 				}
 
 				// Create an orderbook from Coinbasepro
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.coinbasepro_orderbook_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_orderbook_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getCoinbaseproFactory().create_orderbook_feeders(_ep, _ctx, _cp));
 				}
 			}
 		}

@@ -49,17 +49,17 @@ public class KucoinFactory extends GenericFactory {
 				// Set refresh time
 				String refresh_timer = Config.getInstance().get(Constants.kucoin_refresh_rate);
                 if (refresh_timer != null) {
-					ExchangesFactory.getAcxFactory().setRefreshRate(Long.parseLong(refresh_timer) * 1000);
+					ExchangesFactory.getKucoinFactory().setRefreshRate(Long.parseLong(refresh_timer) * 1000);
 				}
 
 				// Create a ticker from Kucoin
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.kucoin_ticker_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_ticker_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getKucoinFactory().create_ticker_feeders(_ep, _ctx, _cp));
 				}
 
 				// Create an orderbook from Kucoin
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.kucoin_orderbook_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_orderbook_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getKucoinFactory().create_orderbook_feeders(_ep, _ctx, _cp));
 				}
 			}
 		}

@@ -48,12 +48,12 @@ public class BitflyerFactory extends GenericStreamingFactory {
 
 				// Create a ticker from Bitflyer
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.bitflyer_ticker_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_ticker_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getBitflyerFactory().create_ticker_feeders(_ep, _ctx, _cp));
 				}
 
 				// Create an orderbook from Bitflyer
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.bitflyer_orderbook_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_orderbook_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getBitflyerFactory().create_orderbook_feeders(_ep, _ctx, _cp));
 				}
 			}
 		}

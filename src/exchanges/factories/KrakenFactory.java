@@ -48,12 +48,12 @@ public class KrakenFactory extends GenericStreamingFactory {
 
 				// Create a ticker from Kraken
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.kraken_ticker_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_ticker_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getKrakenFactory().create_ticker_feeders(_ep, _ctx, _cp));
 				}
 
 				// Create an orderbook from Kraken
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.kraken_orderbook_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_orderbook_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getKrakenFactory().create_orderbook_feeders(_ep, _ctx, _cp));
 				}
 			}
 		}

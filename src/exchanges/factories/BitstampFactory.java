@@ -48,12 +48,12 @@ public class BitstampFactory extends GenericStreamingFactory {
 
 				// Create a ticker from Bitstamp
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.bitstamp_ticker_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_ticker_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getBitstampFactory().create_ticker_feeders(_ep, _ctx, _cp));
 				}
 
 				// Create an orderbook from Bitstamp
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.bitstamp_orderbook_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_orderbook_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getBitstampFactory().create_orderbook_feeders(_ep, _ctx, _cp));
 				}
 			}
 		}

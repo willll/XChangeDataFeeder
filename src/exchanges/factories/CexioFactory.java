@@ -48,12 +48,12 @@ public class CexioFactory extends GenericStreamingFactory {
 
 				// Create a ticker from Cexio
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.Cexio_ticker_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_ticker_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getCexioFactory().create_ticker_feeders(_ep, _ctx, _cp));
 				}
 
 				// Create an orderbook from Cexio
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.Cexio_orderbook_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_orderbook_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getCexioFactory().create_orderbook_feeders(_ep, _ctx, _cp));
 				}
 			}
 		}

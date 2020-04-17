@@ -48,12 +48,12 @@ public class BankeraFactory extends GenericStreamingFactory {
 
 				// Create a ticker from Bankera
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.bankera_ticker_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_ticker_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getBankeraFactory().create_ticker_feeders(_ep, _ctx, _cp));
 				}
 
 				// Create an orderbook from Bankera
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.bankera_orderbook_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_orderbook_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getBankeraFactory().create_orderbook_feeders(_ep, _ctx, _cp));
 				}
 			}
 		}

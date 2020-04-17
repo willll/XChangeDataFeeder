@@ -49,17 +49,17 @@ public class CobinhoodFactory extends GenericFactory {
 				// Set refresh time
 				String refresh_timer = Config.getInstance().get(Constants.cobinhood_refresh_rate);
                 if (refresh_timer != null) {
-					ExchangesFactory.getAcxFactory().setRefreshRate(Long.parseLong(refresh_timer) * 1000);
+					ExchangesFactory.getCobinhoodFactory().setRefreshRate(Long.parseLong(refresh_timer) * 1000);
 				}
 
 				// Create a ticker from Cobinhood
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.cobinhood_ticker_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_ticker_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getCobinhoodFactory().create_ticker_feeders(_ep, _ctx, _cp));
 				}
 
 				// Create an orderbook from Cobinhood
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.cobinhood_orderbook_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_orderbook_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getCobinhoodFactory().create_orderbook_feeders(_ep, _ctx, _cp));
 				}
 			}
 		}

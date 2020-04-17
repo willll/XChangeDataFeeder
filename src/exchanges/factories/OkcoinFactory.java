@@ -48,12 +48,12 @@ public class OkcoinFactory extends GenericStreamingFactory {
 
 				// Create a ticker from Okcoin
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.OkCoin_ticker_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_ticker_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getOkcoinFactory().create_ticker_feeders(_ep, _ctx, _cp));
 				}
 
 				// Create an orderbook from Okcoin
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.OkCoin_orderbook_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_orderbook_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getOkcoinFactory().create_orderbook_feeders(_ep, _ctx, _cp));
 				}
 			}
 		}

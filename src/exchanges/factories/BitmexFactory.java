@@ -48,12 +48,12 @@ public class BitmexFactory extends GenericStreamingFactory {
 
 				// Create a ticker from Bitmex
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.bitmex_ticker_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_ticker_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getBitmexFactory().create_ticker_feeders(_ep, _ctx, _cp));
 				}
 
 				// Create an orderbook from Bitmex
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.bitmex_orderbook_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_orderbook_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getBitmexFactory().create_orderbook_feeders(_ep, _ctx, _cp));
 				}
 			}
 		}

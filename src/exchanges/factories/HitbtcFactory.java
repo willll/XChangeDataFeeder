@@ -48,12 +48,12 @@ public class HitbtcFactory extends GenericStreamingFactory {
 
 				// Create a ticker from Hitbtc
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.hitbtc_ticker_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_ticker_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getHitbtcFactory().create_ticker_feeders(_ep, _ctx, _cp));
 				}
 
 				// Create an orderbook from Hitbtc
 				if (Boolean.parseBoolean(Config.getInstance().get(Constants.hitbtc_orderbook_enabled))) {
-					_thds.addAll(ExchangesFactory.getAcxFactory().create_orderbook_feeders(_ep, _ctx, _cp));
+					_thds.addAll(ExchangesFactory.getHitbtcFactory().create_orderbook_feeders(_ep, _ctx, _cp));
 				}
 			}
 		}
