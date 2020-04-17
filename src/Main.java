@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 import org.apache.commons.cli.CommandLine;
@@ -18,7 +17,6 @@ import org.zeromq.ZMQ;
 import org.zeromq.ZMQ.Socket;
 
 import exchanges.factories.*;
-import exchanges.factories.EntryPoint.Exchanges;
 import utils.Config;
 import utils.Constants;
 

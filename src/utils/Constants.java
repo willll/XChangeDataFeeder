@@ -547,8 +547,6 @@ public class Constants {
 	public static final String bity_API = null;
 
 // Coin market cap default refresh rate
-	public static final long COINMARKETCAP_DEFAULT_REFRESH_RATE = 10 * 60 * 1000;
-
 	public static final String coinmarketcap_API = "coinmarketcap_API";
 
 	public static final String coinmarketcap_secret = "coinmarketcap_secret";
