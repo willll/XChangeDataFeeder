@@ -22,6 +22,10 @@ public class GenericFactory implements IFactory, ILogger {
 	protected Boolean can_handle_multiple_threads = true;
 	protected long refresh_rate = Constants.EXCHANGE_UPDATE_DELAY;
 
+	public void setRefreshRate(long _refresh_rate) {
+		this.refresh_rate = _refresh_rate;
+	}
+	
 	/**
 	 * @author will
 	 *
