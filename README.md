@@ -4,6 +4,8 @@
 
 * mvn exec:java -Dexec.mainClass=Main
 
+* mvn exec:java -Dexec.mainClass=Main -Dexec.args="-list"
+
 >[Eclipse]
 
 * How to configure bitbucket in eclipse : http://crunchify.com/how-to-configure-bitbucket-git-repository-in-you-eclipse/
