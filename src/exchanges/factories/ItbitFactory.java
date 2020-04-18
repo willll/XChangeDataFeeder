@@ -2,17 +2,13 @@ package exchanges.factories;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 import org.knowm.xchange.currency.CurrencyPair;
 import org.zeromq.ZContext;
 
 import exchanges.factories.EntryPoint.Exchanges;
-import utils.Config;
 import utils.Constants;
-import utils.CurrencyPairs;
 
 public class ItbitFactory extends GenericFactory {
 
@@ -22,46 +18,57 @@ public class ItbitFactory extends GenericFactory {
 		orderbook_pub = "ITBIT_ORDERBOOK_PUB";
 	}
 
+	/**
+	 * @param _listCmd
+	 * @param _ep
+	 * @param _cp
+	 * @param _thds
+	 * @param _ctx
+	 * @throws IOException
+	 */
 	public static void ItBit(Boolean _listCmd, EntryPoint _ep, Set<CurrencyPair> _cp, ArrayList<Thread> _thds,
 	        ZContext _ctx) throws IOException {
-		if (Boolean.parseBoolean(Config.getInstance().get(Constants.ItBit_enabled))) {
-			if (_listCmd) {
-				CurrencyPairs.displayCurrencyPairs(Exchanges.ITBIT, _ep.getExchange(Exchanges.ITBIT).getCurrencyPairs());
-			} else {
-				Set<CurrencyPair> Itbit_cp = _cp;
-				String bscp = Config.getInstance().get(Constants.ItBit_currency_pairs);
-				if (bscp != null) {
-					Itbit_cp = new HashSet<>();
-					for (String pair : bscp.split(",")) {
-						Itbit_cp.add(new CurrencyPair(pair));
-					}
-				} else {
-					Itbit_cp = _ep.getExchange(Exchanges.ITBIT).getCurrencyPairs();
-					Iterator<CurrencyPair> pair = _cp.iterator();
-					while (pair.hasNext()) {
-						CurrencyPair p = pair.next();
-						if (!Itbit_cp.contains(p)) {
-							pair.remove();
-						}
-					}
-				}
+		GenericFactory gf_ = ExchangesFactory.getItbitFactory();
+		GenericFactory.start(_listCmd,  _ep, _cp, _thds, _ctx, gf_);
+	}
 
-				// Set refresh time
-				String refresh_timer = Config.getInstance().get(Constants.ItBit_refresh_rate);
-                if (refresh_timer != null) {
-					ExchangesFactory.getItbitFactory().setRefreshRate(Long.parseLong(refresh_timer) * 1000);
-				}
+	/**
+	 *
+	 */
+	@Override
+	public String getEnabled() {
+		return Constants.ItBit_enabled;
+	}
 
-				// Create a ticker from Itbit
-				if (Boolean.parseBoolean(Config.getInstance().get(Constants.ItBit_ticker_enabled))) {
-					_thds.addAll(ExchangesFactory.getItbitFactory().create_ticker_feeders(_ep, _ctx, _cp));
-				}
+	/**
+	 *
+	 */
+	@Override
+	public String getCurrencyPairs() {
+		return Constants.ItBit_currency_pairs;
+	}
 
-				// Create an orderbook from Itbit
-				if (Boolean.parseBoolean(Config.getInstance().get(Constants.ItBit_orderbook_enabled))) {
-					_thds.addAll(ExchangesFactory.getItbitFactory().create_orderbook_feeders(_ep, _ctx, _cp));
-				}
-			}
-		}
+	/**
+	 *
+	 */
+	@Override
+	public String getTickerEnabled() {
+		return Constants.ItBit_ticker_enabled;
+	}
+
+	/**
+	 *
+	 */
+	@Override
+	public String getOrderbookEnabled() {
+		return Constants.ItBit_orderbook_enabled;
+	}
+
+	/**
+	 *
+	 */
+	@Override
+	public String getRefreshRate() {
+		return Constants.ItBit_refresh_rate;
 	}
 }

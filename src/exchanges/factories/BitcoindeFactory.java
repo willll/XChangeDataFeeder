@@ -2,17 +2,13 @@ package exchanges.factories;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 import org.knowm.xchange.currency.CurrencyPair;
 import org.zeromq.ZContext;
 
 import exchanges.factories.EntryPoint.Exchanges;
-import utils.Config;
 import utils.Constants;
-import utils.CurrencyPairs;
 
 public class BitcoindeFactory extends GenericFactory {
 
@@ -22,46 +18,57 @@ public class BitcoindeFactory extends GenericFactory {
 		orderbook_pub = "BITCOINDE_ORDERBOOK_PUB";
 	}
 
+	/**
+	 * @param _listCmd
+	 * @param _ep
+	 * @param _cp
+	 * @param _thds
+	 * @param _ctx
+	 * @throws IOException
+	 */
 	public static void bitcoinde(Boolean _listCmd, EntryPoint _ep, Set<CurrencyPair> _cp, ArrayList<Thread> _thds,
 	        ZContext _ctx) throws IOException {
-		if (Boolean.parseBoolean(Config.getInstance().get(Constants.bitcoinde_enabled))) {
-			if (_listCmd) {
-				CurrencyPairs.displayCurrencyPairs(Exchanges.BITCOINDE, _ep.getExchange(Exchanges.BITCOINDE).getCurrencyPairs());
-			} else {
-				Set<CurrencyPair> Bitcoinde_cp = _cp;
-				String bscp = Config.getInstance().get(Constants.bitcoinde_currency_pairs);
-				if (bscp != null) {
-					Bitcoinde_cp = new HashSet<>();
-					for (String pair : bscp.split(",")) {
-						Bitcoinde_cp.add(new CurrencyPair(pair));
-					}
-				} else {
-					Bitcoinde_cp = _ep.getExchange(Exchanges.BITCOINDE).getCurrencyPairs();
-					Iterator<CurrencyPair> pair = _cp.iterator();
-					while (pair.hasNext()) {
-						CurrencyPair p = pair.next();
-						if (!Bitcoinde_cp.contains(p)) {
-							pair.remove();
-						}
-					}
-				}
+		GenericFactory gf_ = ExchangesFactory.getBitcoindeFactory();
+		GenericFactory.start(_listCmd,  _ep, _cp, _thds, _ctx, gf_);
+	}
 
-				// Set refresh time
-				String refresh_timer = Config.getInstance().get(Constants.bitcoinde_refresh_rate);
-                if (refresh_timer != null) {
-					ExchangesFactory.getBitcoindeFactory().setRefreshRate(Long.parseLong(refresh_timer) * 1000);
-				}
+	/**
+	 *
+	 */
+	@Override
+	public String getEnabled() {
+		return Constants.bitcoinde_enabled;
+	}
 
-				// Create a ticker from Bitcoinde
-				if (Boolean.parseBoolean(Config.getInstance().get(Constants.bitcoinde_ticker_enabled))) {
-					_thds.addAll(ExchangesFactory.getBitcoindeFactory().create_ticker_feeders(_ep, _ctx, _cp));
-				}
+	/**
+	 *
+	 */
+	@Override
+	public String getCurrencyPairs() {
+		return Constants.bitcoinde_currency_pairs;
+	}
 
-				// Create an orderbook from Bitcoinde
-				if (Boolean.parseBoolean(Config.getInstance().get(Constants.bitcoinde_orderbook_enabled))) {
-					_thds.addAll(ExchangesFactory.getBitcoindeFactory().create_orderbook_feeders(_ep, _ctx, _cp));
-				}
-			}
-		}
+	/**
+	 *
+	 */
+	@Override
+	public String getTickerEnabled() {
+		return Constants.bitcoinde_ticker_enabled;
+	}
+
+	/**
+	 *
+	 */
+	@Override
+	public String getOrderbookEnabled() {
+		return Constants.bitcoinde_orderbook_enabled;
+	}
+
+	/**
+	 *
+	 */
+	@Override
+	public String getRefreshRate() {
+		return Constants.bitcoinde_refresh_rate;
 	}
 }

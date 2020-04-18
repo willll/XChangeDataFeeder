@@ -51,5 +51,8 @@ public class Config {
 	public String get(String key) {
 		return prop.getProperty(key, null);
 	}
-
+	
+	public static Boolean isEnabled(String _in) throws IOException {
+		return Boolean.parseBoolean(Config.getInstance().get(_in));
+	}
 }

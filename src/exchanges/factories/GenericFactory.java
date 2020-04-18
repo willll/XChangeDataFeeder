@@ -2,6 +2,8 @@ package exchanges.factories;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -12,9 +14,11 @@ import exchanges.factories.EntryPoint.Exchanges;
 import features.ILogger;
 import tasks.OrderBookPublisherTask;
 import tasks.TickerPublisherTask;
+import utils.Config;
 import utils.Constants;
+import utils.CurrencyPairs;
 
-public class GenericFactory implements IFactory, ILogger {
+public abstract class GenericFactory implements IFactory, IPollingFactory, ILogger {
 
 	protected Exchanges exchange;
 	protected String ticker_pub;
@@ -22,8 +26,45 @@ public class GenericFactory implements IFactory, ILogger {
 	protected Boolean can_handle_multiple_threads = true;
 	protected long refresh_rate = Constants.EXCHANGE_UPDATE_DELAY;
 
+	/**
+	 * @param _gf
+	 * @return
+	 * @throws IOException
+	 */
+	public static Boolean isEnabled(GenericFactory _gf) throws IOException {
+		return Config.isEnabled(_gf.getEnabled());
+	}
+	
+	/**
+	 * @param _gf
+	 * @return
+	 * @throws IOException
+	 */
+	public static Boolean isTickerEnabled(GenericFactory _gf) throws IOException {
+		return Config.isEnabled(_gf.getTickerEnabled());
+	}
+	
+	/**
+	 * @param _gf
+	 * @return
+	 * @throws IOException
+	 */
+	public static Boolean isOrderbookEnabled(GenericFactory _gf) throws IOException {
+		return Config.isEnabled(_gf.getOrderbookEnabled());
+	}
+	
+	/**
+	 * @param _refresh_rate
+	 */
 	public void setRefreshRate(long _refresh_rate) {
 		this.refresh_rate = _refresh_rate;
+	}
+	
+	/**
+	 * @return
+	 */
+	public Exchanges getExchange() {
+		return this.exchange;
 	}
 	
 	/**
@@ -133,5 +174,61 @@ public class GenericFactory implements IFactory, ILogger {
 			thd.start();
 		}
 		return thds;
+	}
+	
+
+	/**
+	 * @param _listCmd
+	 * @param _ep
+	 * @param _cp
+	 * @param _thds
+	 * @param _ctx
+	 * @param _gf
+	 * @throws IOException
+	 */
+	public static void start(Boolean _listCmd, EntryPoint _ep, Set<CurrencyPair> _cp, ArrayList<Thread> _thds,
+	        ZContext _ctx, GenericFactory _gf) throws IOException {
+		
+		Exchanges exchange_ = _gf.getExchange();
+		
+		if (isEnabled(_gf)) {
+			if (_listCmd) {
+				CurrencyPairs.displayCurrencyPairs(exchange_, _ep.getExchange(exchange_).getCurrencyPairs());
+			} else {
+				Set<CurrencyPair> cp_ = _cp;
+				String bscp = Config.getInstance().get(_gf.getCurrencyPairs());
+				if (bscp != null && !bscp.isEmpty()) {
+					cp_ = new HashSet<>();
+					for (String pair : bscp.split(",")) {
+						cp_.add(new CurrencyPair(pair));
+					}
+				} else {
+					cp_ = _ep.getExchange(exchange_).getCurrencyPairs();
+					Iterator<CurrencyPair> pair = _cp.iterator();
+					while (pair.hasNext()) {
+						CurrencyPair p = pair.next();
+						if (!_cp.contains(p)) {
+							pair.remove();
+						}
+					}
+				}
+
+				// Set refresh time
+				String refresh_timer = Config.getInstance().get(_gf.getRefreshRate());
+                if (refresh_timer != null) {
+					_gf.setRefreshRate(Long.parseLong(refresh_timer) * 1000);
+				}
+
+				// Create a ticker task
+				if (isTickerEnabled(_gf)) {
+					_thds.addAll(_gf.create_ticker_feeders(_ep, _ctx, _cp));
+				}
+
+				// Create an orderbook task
+				if (isOrderbookEnabled(_gf)) {
+					_thds.addAll(_gf.create_orderbook_feeders(_ep, _ctx, _cp));
+				}
+			}
+		}
 	}
 }

@@ -2,17 +2,13 @@ package exchanges.factories;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 import org.knowm.xchange.currency.CurrencyPair;
 import org.zeromq.ZContext;
 
 import exchanges.factories.EntryPoint.Exchanges;
-import utils.Config;
 import utils.Constants;
-import utils.CurrencyPairs;
 
 public class KucoinFactory extends GenericFactory {
 
@@ -22,46 +18,57 @@ public class KucoinFactory extends GenericFactory {
 		orderbook_pub = "KUCOIN_ORDERBOOK_PUB";
 	}
 
+	/**
+	 * @param _listCmd
+	 * @param _ep
+	 * @param _cp
+	 * @param _thds
+	 * @param _ctx
+	 * @throws IOException
+	 */
 	public static void kucoin(Boolean _listCmd, EntryPoint _ep, Set<CurrencyPair> _cp, ArrayList<Thread> _thds,
 	        ZContext _ctx) throws IOException {
-		if (Boolean.parseBoolean(Config.getInstance().get(Constants.kucoin_enabled))) {
-			if (_listCmd) {
-				CurrencyPairs.displayCurrencyPairs(Exchanges.KUCOIN, _ep.getExchange(Exchanges.KUCOIN).getCurrencyPairs());
-			} else {
-				Set<CurrencyPair> Kucoin_cp = _cp;
-				String bscp = Config.getInstance().get(Constants.kucoin_currency_pairs);
-				if (bscp != null) {
-					Kucoin_cp = new HashSet<>();
-					for (String pair : bscp.split(",")) {
-						Kucoin_cp.add(new CurrencyPair(pair));
-					}
-				} else {
-					Kucoin_cp = _ep.getExchange(Exchanges.KUCOIN).getCurrencyPairs();
-					Iterator<CurrencyPair> pair = _cp.iterator();
-					while (pair.hasNext()) {
-						CurrencyPair p = pair.next();
-						if (!Kucoin_cp.contains(p)) {
-							pair.remove();
-						}
-					}
-				}
+		GenericFactory gf_ = ExchangesFactory.getKucoinFactory();
+		GenericFactory.start(_listCmd,  _ep, _cp, _thds, _ctx, gf_);
+	}
 
-				// Set refresh time
-				String refresh_timer = Config.getInstance().get(Constants.kucoin_refresh_rate);
-                if (refresh_timer != null) {
-					ExchangesFactory.getKucoinFactory().setRefreshRate(Long.parseLong(refresh_timer) * 1000);
-				}
+	/**
+	 *
+	 */
+	@Override
+	public String getEnabled() {
+		return Constants.kucoin_enabled;
+	}
 
-				// Create a ticker from Kucoin
-				if (Boolean.parseBoolean(Config.getInstance().get(Constants.kucoin_ticker_enabled))) {
-					_thds.addAll(ExchangesFactory.getKucoinFactory().create_ticker_feeders(_ep, _ctx, _cp));
-				}
+	/**
+	 *
+	 */
+	@Override
+	public String getCurrencyPairs() {
+		return Constants.kucoin_currency_pairs;
+	}
 
-				// Create an orderbook from Kucoin
-				if (Boolean.parseBoolean(Config.getInstance().get(Constants.kucoin_orderbook_enabled))) {
-					_thds.addAll(ExchangesFactory.getKucoinFactory().create_orderbook_feeders(_ep, _ctx, _cp));
-				}
-			}
-		}
+	/**
+	 *
+	 */
+	@Override
+	public String getTickerEnabled() {
+		return Constants.kucoin_ticker_enabled;
+	}
+
+	/**
+	 *
+	 */
+	@Override
+	public String getOrderbookEnabled() {
+		return Constants.kucoin_orderbook_enabled;
+	}
+
+	/**
+	 *
+	 */
+	@Override
+	public String getRefreshRate() {
+		return Constants.kucoin_refresh_rate;
 	}
 }

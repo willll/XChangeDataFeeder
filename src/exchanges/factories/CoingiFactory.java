@@ -2,17 +2,13 @@ package exchanges.factories;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 import org.knowm.xchange.currency.CurrencyPair;
 import org.zeromq.ZContext;
 
 import exchanges.factories.EntryPoint.Exchanges;
-import utils.Config;
 import utils.Constants;
-import utils.CurrencyPairs;
 
 public class CoingiFactory extends GenericFactory {
 
@@ -22,46 +18,57 @@ public class CoingiFactory extends GenericFactory {
 		orderbook_pub = "COINGI_ORDERBOOK_PUB";
 	}
 
+	/**
+	 * @param _listCmd
+	 * @param _ep
+	 * @param _cp
+	 * @param _thds
+	 * @param _ctx
+	 * @throws IOException
+	 */
 	public static void coingi(Boolean _listCmd, EntryPoint _ep, Set<CurrencyPair> _cp, ArrayList<Thread> _thds,
 	        ZContext _ctx) throws IOException {
-		if (Boolean.parseBoolean(Config.getInstance().get(Constants.coingi_enabled))) {
-			if (_listCmd) {
-				CurrencyPairs.displayCurrencyPairs(Exchanges.COINGI, _ep.getExchange(Exchanges.COINGI).getCurrencyPairs());
-			} else {
-				Set<CurrencyPair> Coingi_cp = _cp;
-				String bscp = Config.getInstance().get(Constants.coingi_currency_pairs);
-				if (bscp != null) {
-					Coingi_cp = new HashSet<>();
-					for (String pair : bscp.split(",")) {
-						Coingi_cp.add(new CurrencyPair(pair));
-					}
-				} else {
-					Coingi_cp = _ep.getExchange(Exchanges.COINGI).getCurrencyPairs();
-					Iterator<CurrencyPair> pair = _cp.iterator();
-					while (pair.hasNext()) {
-						CurrencyPair p = pair.next();
-						if (!Coingi_cp.contains(p)) {
-							pair.remove();
-						}
-					}
-				}
+		GenericFactory gf_ = ExchangesFactory.getCoingiFactory();
+		GenericFactory.start(_listCmd,  _ep, _cp, _thds, _ctx, gf_);
+	}
 
-				// Set refresh time
-				String refresh_timer = Config.getInstance().get(Constants.coingi_refresh_rate);
-                if (refresh_timer != null) {
-					ExchangesFactory.getCoingiFactory().setRefreshRate(Long.parseLong(refresh_timer) * 1000);
-				}
+	/**
+	 *
+	 */
+	@Override
+	public String getEnabled() {
+		return Constants.coingi_enabled;
+	}
 
-				// Create a ticker from Coingi
-				if (Boolean.parseBoolean(Config.getInstance().get(Constants.coingi_ticker_enabled))) {
-					_thds.addAll(ExchangesFactory.getCoingiFactory().create_ticker_feeders(_ep, _ctx, _cp));
-				}
+	/**
+	 *
+	 */
+	@Override
+	public String getCurrencyPairs() {
+		return Constants.coingi_currency_pairs;
+	}
 
-				// Create an orderbook from Coingi
-				if (Boolean.parseBoolean(Config.getInstance().get(Constants.coingi_orderbook_enabled))) {
-					_thds.addAll(ExchangesFactory.getCoingiFactory().create_orderbook_feeders(_ep, _ctx, _cp));
-				}
-			}
-		}
+	/**
+	 *
+	 */
+	@Override
+	public String getTickerEnabled() {
+		return Constants.coingi_ticker_enabled;
+	}
+
+	/**
+	 *
+	 */
+	@Override
+	public String getOrderbookEnabled() {
+		return Constants.coingi_orderbook_enabled;
+	}
+
+	/**
+	 *
+	 */
+	@Override
+	public String getRefreshRate() {
+		return Constants.coingi_refresh_rate;
 	}
 }

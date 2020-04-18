@@ -2,12 +2,15 @@ package exchanges.factories;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import org.knowm.xchange.currency.CurrencyPair;
 import org.zeromq.ZContext;
 
 import exchanges.GenericStreamingExchange;
+import exchanges.IExchange;
 import exchanges.factories.EntryPoint.Exchanges;
 import features.ILogger;
 import info.bitrich.xchangestream.core.ProductSubscription;
@@ -17,17 +20,54 @@ import tasks.OrderBookPublisherStreamingTask;
 import tasks.OrderBookPublisherTask;
 import tasks.TickerPublisherStreamingTask;
 import tasks.TickerPublisherTask;
+import utils.Config;
+import utils.Constants;
+import utils.CurrencyPairs;
 
 /**
  * @author will
  *
  */
-public class GenericStreamingFactory implements IFactory, ILogger {
+public abstract class GenericStreamingFactory implements IFactory, ILogger {
 
 	protected Exchanges exchange;
 	protected String ticker_pub;
 	protected String orderbook_pub;
 
+	/**
+	 * @param _gf
+	 * @return
+	 * @throws IOException
+	 */
+	public static Boolean isEnabled(GenericStreamingFactory _gf) throws IOException {
+		return Config.isEnabled(_gf.getEnabled());
+	}
+	
+	/**
+	 * @param _gf
+	 * @return
+	 * @throws IOException
+	 */
+	public static Boolean isTickerEnabled(GenericStreamingFactory _gf) throws IOException {
+		return Config.isEnabled(_gf.getTickerEnabled());
+	}
+	
+	/**
+	 * @param _gf
+	 * @return
+	 * @throws IOException
+	 */
+	public static Boolean isOrderbookEnabled(GenericStreamingFactory _gf) throws IOException {
+		return Config.isEnabled(_gf.getOrderbookEnabled());
+	}
+	
+	/**
+	 * @return
+	 */
+	public Exchanges getExchange() {
+		return this.exchange;
+	}
+	
 	@SuppressWarnings("unused")
 	protected static class ticker_publisher_task<T> extends TickerPublisherTask<T> implements Runnable {
 		/**
@@ -93,7 +133,7 @@ public class GenericStreamingFactory implements IFactory, ILogger {
 		return thds;
 	}
 
-	public OrderBookPublisherStreamingTask create_runnable_orderbook_feeders(EntryPoint ep, ZContext context,
+	public OrderBookPublisherStreamingTask<IExchange> create_runnable_orderbook_feeders(EntryPoint ep, ZContext context,
 			Set<CurrencyPair> cp, ProductSubscriptionBuilder subscriptionBuilder)
 			throws IOException {
 
@@ -170,7 +210,7 @@ public class GenericStreamingFactory implements IFactory, ILogger {
 	 * @throws IOException
 	 */
 	@SuppressWarnings("unused")
-	public TickerPublisherStreamingTask create_runnable_ticker_feeders(EntryPoint ep, ZContext context,
+	public TickerPublisherStreamingTask<IExchange> create_runnable_ticker_feeders(EntryPoint ep, ZContext context,
 			Set<CurrencyPair> cp, Exchanges exchange, ProductSubscriptionBuilder subscriptionBuilder)
 			throws IOException, NullPointerException {
 
@@ -182,5 +222,54 @@ public class GenericStreamingFactory implements IFactory, ILogger {
 		return new TickerPublisherStreamingTask<exchanges.IExchange>(this.ticker_pub,
 				ep.getExchange(exchange), cp, context, null);
 
+	}
+	
+	/**
+	 * @param _listCmd
+	 * @param _ep
+	 * @param _cp
+	 * @param _thds
+	 * @param _ctx
+	 * @param gf_
+	 * @throws IOException
+	 */
+	public static void start(Boolean _listCmd, EntryPoint _ep, Set<CurrencyPair> _cp, ArrayList<Thread> _thds,
+	        ZContext _ctx, GenericStreamingFactory _gf) throws IOException {
+		
+		Exchanges exchange_ = _gf.getExchange();
+		
+		if (isEnabled(_gf)) {
+			if (_listCmd) {
+				CurrencyPairs.displayCurrencyPairs(exchange_, _ep.getExchange(exchange_).getCurrencyPairs());
+			} else {
+				Set<CurrencyPair> cp_ = _cp;
+				String bscp = Config.getInstance().get(_gf.getCurrencyPairs());
+				if (bscp != null && !bscp.isEmpty()) {
+					cp_ = new HashSet<>();
+					for (String pair : bscp.split(",")) {
+						cp_.add(new CurrencyPair(pair));
+					}
+				} else {
+					cp_ = _ep.getExchange(exchange_).getCurrencyPairs();
+					Iterator<CurrencyPair> pair = _cp.iterator();
+					while (pair.hasNext()) {
+						CurrencyPair p = pair.next();
+						if (!cp_.contains(p)) {
+							pair.remove();
+						}
+					}
+				}
+
+				// Create a ticker task
+				if (isTickerEnabled(_gf)) {
+					_thds.addAll(_gf.create_ticker_feeders(_ep, _ctx, _cp));
+				}
+
+				// Create an orderbook task
+				if (isOrderbookEnabled(_gf)) {
+					_thds.addAll(_gf.create_orderbook_feeders(_ep, _ctx, _cp));
+				}
+			}
+		}
 	}
 }

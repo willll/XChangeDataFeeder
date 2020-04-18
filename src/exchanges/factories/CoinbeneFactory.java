@@ -2,17 +2,13 @@ package exchanges.factories;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 import org.knowm.xchange.currency.CurrencyPair;
 import org.zeromq.ZContext;
 
 import exchanges.factories.EntryPoint.Exchanges;
-import utils.Config;
 import utils.Constants;
-import utils.CurrencyPairs;
 
 public class CoinbeneFactory extends GenericFactory {
 
@@ -22,46 +18,57 @@ public class CoinbeneFactory extends GenericFactory {
 		orderbook_pub = "COINBENE_ORDERBOOK_PUB";
 	}
 
+	/**
+	 * @param _listCmd
+	 * @param _ep
+	 * @param _cp
+	 * @param _thds
+	 * @param _ctx
+	 * @throws IOException
+	 */
 	public static void coinbene(Boolean _listCmd, EntryPoint _ep, Set<CurrencyPair> _cp, ArrayList<Thread> _thds,
 	        ZContext _ctx) throws IOException {
-		if (Boolean.parseBoolean(Config.getInstance().get(Constants.coinbene_enabled))) {
-			if (_listCmd) {
-				CurrencyPairs.displayCurrencyPairs(Exchanges.COINBENE, _ep.getExchange(Exchanges.COINBENE).getCurrencyPairs());
-			} else {
-				Set<CurrencyPair> Coinbene_cp = _cp;
-				String bscp = Config.getInstance().get(Constants.coinbene_currency_pairs);
-				if (bscp != null) {
-					Coinbene_cp = new HashSet<>();
-					for (String pair : bscp.split(",")) {
-						Coinbene_cp.add(new CurrencyPair(pair));
-					}
-				} else {
-					Coinbene_cp = _ep.getExchange(Exchanges.COINBENE).getCurrencyPairs();
-					Iterator<CurrencyPair> pair = _cp.iterator();
-					while (pair.hasNext()) {
-						CurrencyPair p = pair.next();
-						if (!Coinbene_cp.contains(p)) {
-							pair.remove();
-						}
-					}
-				}
+		GenericFactory gf_ = ExchangesFactory.getCoinbeneFactory();
+		GenericFactory.start(_listCmd,  _ep, _cp, _thds, _ctx, gf_);
+	}
 
-				// Set refresh time
-				String refresh_timer = Config.getInstance().get(Constants.coinbene_refresh_rate);
-                if (refresh_timer != null) {
-					ExchangesFactory.getCoinbeneFactory().setRefreshRate(Long.parseLong(refresh_timer) * 1000);
-				}
+	/**
+	 *
+	 */
+	@Override
+	public String getEnabled() {
+		return Constants.coinbene_enabled;
+	}
 
-				// Create a ticker from Coinbene
-				if (Boolean.parseBoolean(Config.getInstance().get(Constants.coinbene_ticker_enabled))) {
-					_thds.addAll(ExchangesFactory.getCoinbeneFactory().create_ticker_feeders(_ep, _ctx, _cp));
-				}
+	/**
+	 *
+	 */
+	@Override
+	public String getCurrencyPairs() {
+		return Constants.coinbene_currency_pairs;
+	}
 
-				// Create an orderbook from Coinbene
-				if (Boolean.parseBoolean(Config.getInstance().get(Constants.coinbene_orderbook_enabled))) {
-					_thds.addAll(ExchangesFactory.getCoinbeneFactory().create_orderbook_feeders(_ep, _ctx, _cp));
-				}
-			}
-		}
+	/**
+	 *
+	 */
+	@Override
+	public String getTickerEnabled() {
+		return Constants.coinbene_ticker_enabled;
+	}
+
+	/**
+	 *
+	 */
+	@Override
+	public String getOrderbookEnabled() {
+		return Constants.coinbene_orderbook_enabled;
+	}
+
+	/**
+	 *
+	 */
+	@Override
+	public String getRefreshRate() {
+		return Constants.coinbene_refresh_rate;
 	}
 }

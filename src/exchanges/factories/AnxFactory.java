@@ -2,17 +2,13 @@ package exchanges.factories;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 import org.knowm.xchange.currency.CurrencyPair;
 import org.zeromq.ZContext;
 
 import exchanges.factories.EntryPoint.Exchanges;
-import utils.Config;
 import utils.Constants;
-import utils.CurrencyPairs;
 
 public class AnxFactory extends GenericFactory {
 
@@ -22,46 +18,57 @@ public class AnxFactory extends GenericFactory {
 		orderbook_pub = "ANX_ORDERBOOK_PUB";
 	}
 
+	/**
+	 * @param _listCmd
+	 * @param _ep
+	 * @param _cp
+	 * @param _thds
+	 * @param _ctx
+	 * @throws IOException
+	 */
 	public static void anx(Boolean _listCmd, EntryPoint _ep, Set<CurrencyPair> _cp, ArrayList<Thread> _thds,
 	        ZContext _ctx) throws IOException {
-		if (Boolean.parseBoolean(Config.getInstance().get(Constants.anx_enabled))) {
-			if (_listCmd) {
-				CurrencyPairs.displayCurrencyPairs(Exchanges.ANX, _ep.getExchange(Exchanges.ANX).getCurrencyPairs());
-			} else {
-				Set<CurrencyPair> Anx_cp = _cp;
-				String bscp = Config.getInstance().get(Constants.anx_currency_pairs);
-				if (bscp != null) {
-					Anx_cp = new HashSet<>();
-					for (String pair : bscp.split(",")) {
-						Anx_cp.add(new CurrencyPair(pair));
-					}
-				} else {
-					Anx_cp = _ep.getExchange(Exchanges.ANX).getCurrencyPairs();
-					Iterator<CurrencyPair> pair = _cp.iterator();
-					while (pair.hasNext()) {
-						CurrencyPair p = pair.next();
-						if (!Anx_cp.contains(p)) {
-							pair.remove();
-						}
-					}
-				}
+		GenericFactory gf_ = ExchangesFactory.getAnxFactory();
+		GenericFactory.start(_listCmd,  _ep, _cp, _thds, _ctx, gf_);
+	}
 
-				// Set refresh time
-				String refresh_timer = Config.getInstance().get(Constants.anx_refresh_rate);
-                if (refresh_timer != null) {
-					ExchangesFactory.getAnxFactory().setRefreshRate(Long.parseLong(refresh_timer) * 1000);
-				}
+	/**
+	 *
+	 */
+	@Override
+	public String getEnabled() {
+		return Constants.anx_enabled;
+	}
 
-				// Create a ticker from Anx
-				if (Boolean.parseBoolean(Config.getInstance().get(Constants.anx_ticker_enabled))) {
-					_thds.addAll(ExchangesFactory.getAnxFactory().create_ticker_feeders(_ep, _ctx, _cp));
-				}
+	/**
+	 *
+	 */
+	@Override
+	public String getCurrencyPairs() {
+		return Constants.anx_currency_pairs;
+	}
 
-				// Create an orderbook from Anx
-				if (Boolean.parseBoolean(Config.getInstance().get(Constants.anx_orderbook_enabled))) {
-					_thds.addAll(ExchangesFactory.getAnxFactory().create_orderbook_feeders(_ep, _ctx, _cp));
-				}
-			}
-		}
+	/**
+	 *
+	 */
+	@Override
+	public String getTickerEnabled() {
+		return Constants.anx_ticker_enabled;
+	}
+
+	/**
+	 *
+	 */
+	@Override
+	public String getOrderbookEnabled() {
+		return Constants.anx_orderbook_enabled;
+	}
+
+	/**
+	 *
+	 */
+	@Override
+	public String getRefreshRate() {
+		return Constants.anx_refresh_rate;
 	}
 }

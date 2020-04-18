@@ -11,7 +11,6 @@ import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.knowm.xchange.dto.marketdata.Ticker;
 import org.knowm.xchange.dto.marketdata.Trades;
 import org.knowm.xchange.service.marketdata.params.CurrencyPairsParam;
-
 import features.ILogger;
 
 /**
@@ -105,5 +104,4 @@ public abstract class GenericExchange implements IExchange, ILogger {
 			return new HashSet<CurrencyPair>();
 		}
 	}
-
 }
