@@ -348,14 +348,16 @@ public class Main {
 		ZaifFactory.zaif(listCmd, ep, cp, thds, ctx);
 
 
-		// Connect work threads to client threads via a queue
-		ZMQ.proxy(clients, workers, null);
-
-		// Infinite loop
-		for (Thread thd : thds) {
-			thd.join();
+		if (thds.size() > 0) {
+			// Connect work threads to client threads via a queue
+			ZMQ.proxy(clients, workers, null);
+	
+			// Infinite loop
+			for (Thread thd : thds) {
+				thd.join();
+			}
 		}
-
+		
 		workers.close();
 		clients.close();
 		ctx.destroy();
