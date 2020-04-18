@@ -198,11 +198,16 @@ public abstract class GenericFactory implements IFactory, IPollingFactory, ILogg
 				Set<CurrencyPair> cp_ = _cp;
 				String bscp = Config.getInstance().get(_gf.getCurrencyPairs());
 				if (bscp != null && !bscp.isEmpty()) {
-					cp_ = new HashSet<>();
-					for (String pair : bscp.split(",")) {
-						cp_.add(new CurrencyPair(pair));
+					if (bscp.trim().toLowerCase().equals("all")) {
+						cp_ = _ep.getExchange(exchange_).getCurrencyPairs();
+					} else {
+						cp_ = new HashSet<>();
+						for (String pair : bscp.split(",")) {
+							cp_.add(new CurrencyPair(pair));
+						}
 					}
 				} else {
+					// Merge the currency pairs
 					cp_ = _ep.getExchange(exchange_).getCurrencyPairs();
 					Iterator<CurrencyPair> pair = _cp.iterator();
 					while (pair.hasNext()) {
@@ -221,12 +226,12 @@ public abstract class GenericFactory implements IFactory, IPollingFactory, ILogg
 
 				// Create a ticker task
 				if (isTickerEnabled(_gf)) {
-					_thds.addAll(_gf.create_ticker_feeders(_ep, _ctx, _cp));
+					_thds.addAll(_gf.create_ticker_feeders(_ep, _ctx, cp_));
 				}
 
 				// Create an orderbook task
 				if (isOrderbookEnabled(_gf)) {
-					_thds.addAll(_gf.create_orderbook_feeders(_ep, _ctx, _cp));
+					_thds.addAll(_gf.create_orderbook_feeders(_ep, _ctx, cp_));
 				}
 			}
 		}
