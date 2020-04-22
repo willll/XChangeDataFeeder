@@ -10,24 +10,21 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.knowm.xchange.currency.CurrencyPair;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.zeromq.ZContext;
 import org.zeromq.ZMQ;
 import org.zeromq.ZMQ.Socket;
 
 import exchanges.factories.*;
+import features.ILogger;
 import utils.Config;
 import utils.Constants;
 
-
-public class Main {
-
-	private static Logger logger = LoggerFactory.getLogger("Console");
+public class Main implements ILogger {
 	
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws Exception {
-		logger.trace("STARTUP");
+
+		logger.warn("STARTUP");
 
 		Options options = new Options();
 
@@ -362,6 +359,6 @@ public class Main {
 		clients.close();
 		ctx.destroy();
 
-		logger.trace("EXIT");
+		logger.warn("EXIT");
 	}
 }
