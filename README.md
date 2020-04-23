@@ -13,3 +13,9 @@
 >[How to generate code/configuration files]
 
 * TODO : https://github.com/willll/XChangeTemplateGenerator	
+
+>[How to configure raspbian]
+
+* Setup Static IP : /etc/dhcpcd.conf
+(https://thepihut.com/blogs/raspberry-pi-tutorials/how-to-give-your-raspberry-pi-a-static-ip-address-update)
+ 
