@@ -3,6 +3,7 @@ package tasks;
 import java.util.Set;
 
 import org.knowm.xchange.currency.CurrencyPair;
+import org.zeromq.SocketType;
 import org.zeromq.ZContext;
 import org.zeromq.ZMQ;
 
@@ -25,7 +26,6 @@ public class PublisherTask<T> implements ITask, ILogger {
 	 * @param currencyPairs
 	 * @param context
 	 */
-	@SuppressWarnings("deprecation")
 	public PublisherTask(final String id, final T exchange, Set<CurrencyPair> currencyPairs,
 			final ZContext context, final long refreshRate) {
 		super();
@@ -37,7 +37,7 @@ public class PublisherTask<T> implements ITask, ILogger {
 		this.threadId = Thread.currentThread().getId();
 		this.exchangeName = ((IExchange) exchange).toString();
 
-		this.socket = context.createSocket(ZMQ.PUB);
+		this.socket = context.createSocket(SocketType.PUB);
 		this.socket.connect("inproc://workers");
 		this.exit = false;
 		this.refreshRate = refreshRate;

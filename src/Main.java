@@ -10,6 +10,7 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.knowm.xchange.currency.CurrencyPair;
+import org.zeromq.SocketType;
 import org.zeromq.ZContext;
 import org.zeromq.ZMQ;
 import org.zeromq.ZMQ.Socket;
@@ -21,7 +22,6 @@ import utils.Constants;
 
 public class Main implements ILogger {
 	
-	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws Exception {
 
 		logger.warn("STARTUP");
@@ -56,9 +56,9 @@ public class Main implements ILogger {
 
 		// bus configuration :
 		String port = Config.getInstance().get(Constants.port);
-		Socket clients = ctx.createSocket(ZMQ.XPUB);
-		clients.bind("tcp://*:" + port);
-		Socket workers = ctx.createSocket(ZMQ.XSUB);
+		Socket clients = ctx.createSocket(SocketType.XPUB);
+		clients.bind("tcp://0.0.0.0:" + port);
+		Socket workers = ctx.createSocket(SocketType.XSUB);
 		workers.bind("inproc://workers");
 
 		String scp = Config.getInstance().get(Constants.currency_pairs);
@@ -68,6 +68,7 @@ public class Main implements ILogger {
 	            cp.add(new CurrencyPair(pair));
 			}
 		}
+		// Fallback
 		if(cp.size() == 0)
 			cp.add(new CurrencyPair("BTC/USDT"));
 
@@ -346,9 +347,9 @@ public class Main implements ILogger {
 
 
 		if (thds.size() > 0) {
-			// Connect work threads to client threads via a queue
+			// Connect work threads to client threads via a queue, this is a blocking operation
 			ZMQ.proxy(clients, workers, null);
-	
+			
 			// Infinite loop
 			for (Thread thd : thds) {
 				thd.join();
