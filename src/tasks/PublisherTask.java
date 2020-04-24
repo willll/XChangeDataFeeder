@@ -37,7 +37,7 @@ public class PublisherTask<T> implements ITask, ILogger {
 		this.threadId = Thread.currentThread().getId();
 		this.exchangeName = ((IExchange) exchange).toString();
 
-		this.socket = context.createSocket(SocketType.PUB);
+		this.socket = context.createSocket(SocketType.PUSH);
 		this.socket.connect("inproc://workers");
 		this.exit = false;
 		this.refreshRate = refreshRate;

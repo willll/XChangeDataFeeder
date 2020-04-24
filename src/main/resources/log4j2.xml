@@ -9,7 +9,7 @@
         <Logger name="com.XChangeDataFeeder" level="WARN" additivity="false">
             <AppenderRef ref="LogToConsole"/>
         </Logger>
-        <Root level="DEBUG">
+        <Root level="WARN">
             <AppenderRef ref="LogToConsole"/>
         </Root>
     </Loggers>
