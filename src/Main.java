@@ -56,9 +56,9 @@ public class Main implements ILogger {
 
 		// bus configuration :
 		String port = Config.getInstance().get(Constants.port);
-		Socket clients = ctx.createSocket(SocketType.PUB);
-		clients.bind("tcp://*:" + port);
-		Socket workers = ctx.createSocket(SocketType.PULL);
+		Socket clients = ctx.createSocket(SocketType.XPUB);
+		clients.bind("tcp://0.0.0.0:" + port);
+		Socket workers = ctx.createSocket(SocketType.XSUB);
 		workers.bind("inproc://workers");
 
 		String scp = Config.getInstance().get(Constants.currency_pairs);
