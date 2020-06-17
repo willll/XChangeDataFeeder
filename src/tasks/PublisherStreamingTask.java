@@ -1,6 +1,7 @@
 package tasks;
 
 import java.util.Set;
+import java.io.IOException;
 
 import org.knowm.xchange.currency.CurrencyPair;
 import org.zeromq.ZContext;
@@ -22,7 +23,7 @@ public class PublisherStreamingTask<T> extends PublisherTask<T> {
 	 * @param context
 	 */
 	public PublisherStreamingTask(final String id, final T exchange, Set<CurrencyPair> currencyPairs,
-			final ZContext context, final StreamingExchange streamingExchange) {
+			final ZContext context, final StreamingExchange streamingExchange) throws IOException {
 		super(id, exchange, currencyPairs, context, Constants.EXCHANGE_UPDATE_DELAY);
 		this.streamingExchange = streamingExchange;
 	}

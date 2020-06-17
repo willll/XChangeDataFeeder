@@ -2,10 +2,6 @@ package utils;
 
 public class Constants {
 
-	public static final String port = "port";
-
-	public static final String currency_pairs = "currency_pairs";
-
 	public static final String acx_enabled 				= "acx_enabled";
 	public static final String acx_ticker_enabled 		    = "acx_ticker_enabled";
 	public static final String acx_orderbook_enabled 	    = "acx_orderbook_enabled";
@@ -546,6 +542,8 @@ public class Constants {
 
 	public static final String bity_API = null;
 
+	public static final String currency_pairs = "currency_pairs";
+	
 // Coin market cap default refresh rate
 	public static final String coinmarketcap_API = "coinmarketcap_API";
 
@@ -553,4 +551,23 @@ public class Constants {
 
 	public static final String bity_secret = "bity_secret";
 
+
+	/*
+	 * ZeroMQ configuration
+	 */
+	public static final String zeromq_enable = "zeromq_enable";
+	public static final String port = "port";
+
+	/*
+	 * InfluxDB configuration
+	 */
+	public static final String influxdb_enable = "influxdb_enable";
+	public static final String influxdb_address = "influxdb_address";
+	public static final String influxdb_port = "influxdb_port";
+	public static final String influxdb_username = "influxdb_username";
+	public static final String influxdb_password = "influxdb_password";
+	
+
+	
+	
 }

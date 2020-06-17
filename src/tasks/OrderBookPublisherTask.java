@@ -20,7 +20,7 @@ import exchanges.IExchange;
 public class OrderBookPublisherTask<T> extends PublisherTask<T> implements Runnable {
 
 	public OrderBookPublisherTask(final String id, final T exchange, Set<CurrencyPair> currencyPairs,
-			final ZContext context, final long refreshRate) {
+			final ZContext context, final long refreshRate) throws IOException  {
 		super(id, exchange, currencyPairs, context, refreshRate);
 	}
 
@@ -30,8 +30,10 @@ public class OrderBookPublisherTask<T> extends PublisherTask<T> implements Runna
 	 */
 	public void pushData(final OrderBook ob) throws JsonProcessingException {
 		String jsonOutput = mapper.writeValueAsString(ob);
-		socket.sendMore(this.id);
-		socket.send(jsonOutput);
+		if (isZeroMQEnable()) {
+			socket.sendMore(this.id);
+			socket.send(jsonOutput);
+		}
 		logger.debug(this.threadId + " : Sent : " + this.exchangeName + " : " + jsonOutput);
 	}
 

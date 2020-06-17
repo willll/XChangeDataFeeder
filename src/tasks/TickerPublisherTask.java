@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.lang.reflect.UndeclaredThrowableException;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
+import org.influxdb.dto.Point;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.Ticker;
 import org.knowm.xchange.exceptions.CurrencyPairNotValidException;
@@ -27,7 +29,7 @@ import exchanges.IExchange;
 public class TickerPublisherTask<T> extends PublisherTask<T> implements Runnable {
 
 	public TickerPublisherTask(final String id, final T exchange, Set<CurrencyPair> currencyPairs,
-			final ZContext context, final long refreshRate) {
+			final ZContext context, final long refreshRate) throws IOException {
 		super(id, exchange, currencyPairs, context, refreshRate);
 	}
 
@@ -36,9 +38,67 @@ public class TickerPublisherTask<T> extends PublisherTask<T> implements Runnable
 	 * @param cp
 	 * @throws JsonProcessingException
 	 */
-	public void pushData(final Ticker tck) throws JsonProcessingException {
-		socket.sendMore(this.id);
-		socket.send(mapper.writeValueAsString(tck), ZMQ.DONTWAIT);
+	public void pushData(final Ticker tck, final CurrencyPair cp) throws JsonProcessingException {
+		if (isZeroMQEnable()) {
+			socket.sendMore(this.id);
+			socket.send(mapper.writeValueAsString(tck), ZMQ.DONTWAIT);
+		}
+		
+		if (isInfluxDBEnable()) {
+			long timestamp = tck.getTimestamp().getTime();
+
+			if (timestamp != 0) {
+
+				influxDB.write(Point.measurement(cp.toString()).time(timestamp, TimeUnit.MILLISECONDS)
+						.addField("open", tck.getOpen()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).time(timestamp, TimeUnit.MILLISECONDS)
+						.addField("last", tck.getLast()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).time(timestamp, TimeUnit.MILLISECONDS)
+						.addField("bid", tck.getBid()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).time(timestamp, TimeUnit.MILLISECONDS)
+						.addField("ask", tck.getAsk()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).time(timestamp, TimeUnit.MILLISECONDS)
+						.addField("high", tck.getHigh()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).time(timestamp, TimeUnit.MILLISECONDS)
+						.addField("low", tck.getLow()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).time(timestamp, TimeUnit.MILLISECONDS)
+						.addField("vwap", tck.getVwap()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).time(timestamp, TimeUnit.MILLISECONDS)
+						.addField("volume", tck.getVolume()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).time(timestamp, TimeUnit.MILLISECONDS)
+						.addField("quoteVolume", tck.getQuoteVolume()).build());
+			} else {
+
+				// If timestamp is null, just push to influxDB without any time, by default it
+				// will add the current time
+				influxDB.write(Point.measurement(cp.toString()).addField("open", tck.getOpen()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).addField("last", tck.getLast()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).addField("bid", tck.getBid()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).addField("ask", tck.getAsk()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).addField("high", tck.getHigh()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).addField("low", tck.getLow()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).addField("vwap", tck.getVwap()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).addField("volume", tck.getVolume()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).addField("quoteVolume", tck.getQuoteVolume()).build());
+			}
+
+		}
 		logger.info("Sending:" + mapper.writeValueAsString(tck));
 	}
 
@@ -64,7 +124,7 @@ public class TickerPublisherTask<T> extends PublisherTask<T> implements Runnable
 						// try {
 						for (CurrencyPair cp : this.currencyPairs) {
 							try {
-								pushData(((IExchange) exchange).getTicker(cp));
+								pushData(((IExchange) exchange).getTicker(cp), cp);
 							} catch (IOException e) {
 								logger.error(
 										this.threadId + " : IOError : " + this.exchangeName + " : " + cp.toString());

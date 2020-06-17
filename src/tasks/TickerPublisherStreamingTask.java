@@ -1,7 +1,10 @@
 package tasks;
 
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
+import java.io.IOException;
 
+import org.influxdb.dto.Point;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.Ticker;
 import org.zeromq.ZContext;
@@ -26,7 +29,7 @@ public class TickerPublisherStreamingTask<T> extends PublisherStreamingTask<T> i
 	 * @param streamingExchange
 	 */
 	public TickerPublisherStreamingTask(final String id, final T exchange, Set<CurrencyPair> currencyPairs,
-			final ZContext context, final StreamingExchange streamingExchange) {
+			final ZContext context, final StreamingExchange streamingExchange) throws IOException {
 		super(id, exchange, currencyPairs, context, streamingExchange);
 	}
 
@@ -36,9 +39,68 @@ public class TickerPublisherStreamingTask<T> extends PublisherStreamingTask<T> i
 	 * @throws JsonProcessingException
 	 */
 	public void pushData(final Ticker tck, final CurrencyPair cp) throws JsonProcessingException {
-		socket.sendMore(this.id);
-		socket.send(mapper.writeValueAsString(tck), 0);
+		if (isZeroMQEnable()) {
+			socket.sendMore(this.id);
+			socket.send(mapper.writeValueAsString(tck), 0);
+		}
+		if (isInfluxDBEnable()) {
+
+			if (tck.getTimestamp() != null) {
+				
+				long timestamp = tck.getTimestamp().getTime();
+				
+				influxDB.write(Point.measurement(cp.toString()).time(timestamp, TimeUnit.MILLISECONDS)
+						.addField("open", tck.getOpen()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).time(timestamp, TimeUnit.MILLISECONDS)
+						.addField("last", tck.getLast()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).time(timestamp, TimeUnit.MILLISECONDS)
+						.addField("bid", tck.getBid()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).time(timestamp, TimeUnit.MILLISECONDS)
+						.addField("ask", tck.getAsk()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).time(timestamp, TimeUnit.MILLISECONDS)
+						.addField("high", tck.getHigh()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).time(timestamp, TimeUnit.MILLISECONDS)
+						.addField("low", tck.getLow()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).time(timestamp, TimeUnit.MILLISECONDS)
+						.addField("vwap", tck.getVwap()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).time(timestamp, TimeUnit.MILLISECONDS)
+						.addField("volume", tck.getVolume()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).time(timestamp, TimeUnit.MILLISECONDS)
+						.addField("quoteVolume", tck.getQuoteVolume()).build());
+			} else {
+
+				// If timestamp is null, just push to influxDB without any time, by default it
+				// will add the current time
+				influxDB.write(Point.measurement(cp.toString()).addField("open", tck.getOpen()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).addField("last", tck.getLast()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).addField("bid", tck.getBid()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).addField("ask", tck.getAsk()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).addField("high", tck.getHigh()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).addField("low", tck.getLow()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).addField("vwap", tck.getVwap()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).addField("volume", tck.getVolume()).build());
+
+				influxDB.write(Point.measurement(cp.toString()).addField("quoteVolume", tck.getQuoteVolume()).build());
+			}
+
+		}
 		logger.info("Sending:" + cp.toString() + " " + mapper.writeValueAsString(tck.toString()));
+
 	}
 
 	/*

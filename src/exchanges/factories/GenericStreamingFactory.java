@@ -76,7 +76,7 @@ public abstract class GenericStreamingFactory implements IFactory, ILogger {
 		 * @param pub
 		 */
 		public ticker_publisher_task(T exchange, Set<CurrencyPair> currencyPair, ZContext context,
-				final String pub, final long refresh_rate) {
+				final String pub, final long refresh_rate) throws IOException {
 			super(pub, exchange, currencyPair, context, refresh_rate);
 		}
 	}
@@ -89,7 +89,7 @@ public abstract class GenericStreamingFactory implements IFactory, ILogger {
 	@SuppressWarnings("unused")
 	protected static class Orderbook_publisher_task<T> extends OrderBookPublisherTask<T> implements Runnable {
 		public Orderbook_publisher_task(T exchange, Set<CurrencyPair> currencyPair, ZContext context,
-				final String pub, final long refresh_rate) {
+				final String pub, final long refresh_rate) throws IOException {
 			super(pub, exchange, currencyPair, context, refresh_rate);
 		}
 	}
