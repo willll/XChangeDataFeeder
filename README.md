@@ -1,3 +1,22 @@
+>[TODO]
+
+
+* Migrate to XChange 5.0 that include the stream APIs
+
+>[Exchanges]
+
+* Bitstamp : Not working, API key missing ?
+
+* hitBC :
+
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.knowm.xchange.hitbtc.v2.HitbtcExchange (file:/home/will/.m2/repository/org/knowm/xchange/xchange-hitbtc/4.4.2/xchange-hitbtc-4.4.2.jar) to field java.net.HttpURLConnection.methods
+WARNING: Please consider reporting this to the maintainers of org.knowm.xchange.hitbtc.v2.HitbtcExchange
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+
+But working OK
+
 >[Maven]
 
 * mvn clean compile
