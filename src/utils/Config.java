@@ -1,7 +1,10 @@
 package utils;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Properties;
 
 public class Config {
@@ -14,7 +17,7 @@ public class Config {
 
 	private Config(String filename) throws IOException {
 		Filename = filename;
-		load();
+		customload();
 	}
 
 	private Config() throws IOException {
@@ -43,6 +46,14 @@ public class Config {
 		return INSTANCE;
 	}
 
+	protected void customload() throws IOException {
+		Path currentPath = Paths.get(System.getProperty("user.dir"));
+		Path filePath = Paths.get(currentPath.toString(), Filename);
+		input = new FileInputStream(filePath.toFile());
+		prop.load(input);;
+	}
+	
+	
 	protected void load() throws IOException {
 		input = getClass().getClassLoader().getResourceAsStream(Filename);
 		prop.load(input);

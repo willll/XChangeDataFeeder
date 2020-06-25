@@ -7,6 +7,7 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
+import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.knowm.xchange.currency.CurrencyPair;
@@ -28,10 +29,17 @@ public class Main implements ILogger {
 
 		Options options = new Options();
 
-        Option list = new Option("l", "list", false, "list currencies");
-        list.setRequired(false);
-        options.addOption(list);
+        Option list1 = new Option("l", "list", false, "list currencies");
+        list1.setRequired(false);
+        options.addOption(list1);
 		
+        Option configfile   = OptionBuilder.withArgName( "file" )
+                .hasArg()
+                .withDescription(  "use given configuration file" )
+                .create( "configfile" );
+        configfile.setRequired(false);
+        options.addOption(configfile);
+        
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
         CommandLine cmd = null;
@@ -45,6 +53,11 @@ public class Main implements ILogger {
         }
         
         Boolean listCmd = cmd.hasOption("list");
+        
+		// Custom config file
+		if(cmd.hasOption("configfile")) {
+			Config.getInstance(cmd.getOptionValue("configfile"));
+		}
         
 		ArrayList<Thread> thds = new ArrayList<Thread>();
 
@@ -72,6 +85,7 @@ public class Main implements ILogger {
 		if(cp.size() == 0)
 			cp.add(new CurrencyPair("BTC/USDT"));
 
+		
 		// ACX
 		AcxFactory.acx(listCmd, ep, cp, thds, ctx);
 
