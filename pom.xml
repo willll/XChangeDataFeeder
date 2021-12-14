@@ -35,7 +35,7 @@
 	</build>
 
 	<properties>
-		<log4jVersion>2.13.1</log4jVersion>
+		<log4jVersion>2.16.0</log4jVersion>
 		<disruptor.version>3.4.2</disruptor.version>
 		<xchange.version>4.4.2</xchange.version>
 		<bitrich.xchange.version>4.4.1</bitrich.xchange.version>
